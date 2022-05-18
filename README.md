@@ -1,2 +1,10 @@
 # coffeepedia
-Final Project hacktiv8
+## Tech stack:
+- Node.js
+- Express
+- MongoDB
+- PostgreSQL
+- Sequelize
+- Apollo-Server
+- GraphQL
+- Redis
