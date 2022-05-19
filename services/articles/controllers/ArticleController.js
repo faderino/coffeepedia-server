@@ -3,19 +3,26 @@ const Article = require('../models/ModelArticle');
 class ArticleController {
     static async findAllArticle(req, res, next) {
         try {
-
-            console.log('masuk controller find all')
+            const response = await Article.findAllArticle()
+            if (!response) {
+                throw { name: "Data not found" }
+            }
+            res.status(200).json(response)
         } catch (error) {
-
+            next(error)
         }
     }
 
     static async findArticleById(req, res, next) {
         try {
-
-            console.log('masuk controller find by id')
+            const { id } = req.params
+            const response = await Article.findArticleById(id)
+            if (!response) {
+                throw { name: "Data not found" }
+            }
+            res.status(200).json(response)
         } catch (error) {
-
+            next(error)
         }
     }
 

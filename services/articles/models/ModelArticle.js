@@ -2,14 +2,28 @@ const { getDB } = require('../config/connection');
 const { ObjectId } = require('mongodb');
 
 class Article {
-
+    static article() {
+        const database = getDB()
+        return database.collection('articles')
+    }
     static async findAllArticle() {
-        console.log('masuk model find all')
+        try {
+            const allArticle = await this.article().find().toArray()
+            return allArticle
+        } catch (error) {
+            console.log(error)
+        }
     }
-    static async findArticleById() {
-        console.log('masuk model find by id')
+    static async findArticleById(id) {
+        try {
+            const selectedArticle = await this.article().findOne({
+                _id: ObjectId(id)
+            })
+            return selectedArticle
+        } catch (error) {
+            console.log(error)
+        }
     }
-
 }
 
 module.exports = Article

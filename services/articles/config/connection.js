@@ -8,7 +8,7 @@ let db;
 async function connection() {
     try {
         await client.connect()
-        db = client.db('FProject-Article') // ini ngatur databse yang akan diakses di mongodb
+        db = client.db('FProject-Article')
     } catch (error) {
         console.log(error, "!!! ERROR CONNECTION.JS_SERVER-USER-CONFIG !!!");
     }
