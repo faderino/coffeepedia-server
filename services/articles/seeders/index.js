@@ -1,5 +1,5 @@
 const seedArticles = require('./articles.json');
-const { getDB } = require('../config/connection.js');
+const { connection, getDB } = require('../config/connection.js');
 
 
 async function doSeedArticle() {
