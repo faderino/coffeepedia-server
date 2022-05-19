@@ -24,7 +24,6 @@ class Article {
             console.log(error)
         }
     }
-
 }
 
 module.exports = Article
