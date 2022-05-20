@@ -110,3 +110,12 @@
 ### Tracking Order
 
 -
+
+## Testing
+
+- Drop db testing: `sequelize --env test db:drop`
+- Created db testing: `sequelize --env test db:create`
+- Migrate db testing: `sequelize --env test db:migrate`
+- Seeding db testing: `sequelize --env test db:seed:all`
+- Ketika run test, app.listen nya boleh dicomment atau bikin di bin/www, di app.js lakukan module.exports = app
+- Pada package.json tambahkan script `"test": "jest --runInBand --detectOpenHandles --forceExit"`
