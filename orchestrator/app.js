@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 4000;
 
 const redis = require("./config/connection");
 const axios = require("axios");
-const baseUrlUser = 'http://localhost:4001'
+const baseUrlArticle = 'http://localhost:4001'
 
 const dateScalar = new GraphQLScalarType({
     name: 'Date',
@@ -43,6 +43,7 @@ const typeDefs = gql`
 
     type Query{
         getAllArticle : [Article]
+        getArticleById(_id:ID): Article
     }
 `
 const resolvers = {
@@ -55,15 +56,51 @@ const resolvers = {
                 if (!articlesCache) {
                     console.log('no redis get');
                     const { data } = await axios({
-                        url: `${baseUrlUser}/articles`,
+                        url: `${baseUrlArticle}/articles`,
                         method: 'GET'
                     })
                     articles = data
+                    redis.set('articles', JSON.stringify(data))
+                    return articles
+                } else {
+                    console.log('ready in redis')
+                    return articles
                 }
-                console.log(articles);
-                return articles
             } catch (error) {
                 console.log(error);
+                return error
+            }
+        },
+        getArticleById: async (_, args) => {
+            try {
+                const articleCache = await redis.get('article')
+                let article = JSON.parse(articleCache)
+                if (articleCache) {
+                    if (article._id === args._id) {
+                        // console.log('ada diredis');
+                        return article
+                    } else {
+                        // console.log('redis ada, tp data beda')
+                        redis.del('article')
+                        const { data } = await axios({
+                            url: `${baseUrlArticle}/article/${args._id}`,
+                            method: "GET"
+                        })
+                        article = data
+                        redis.set('article', JSON.stringify(data))
+                        return article
+                    }
+                } else {
+                    // console.log('fetch baru by id');
+                    const { data } = await axios({
+                        url: `${baseUrlArticle}/article/${args._id}`,
+                        method: "GET"
+                    })
+                    article = data
+                    redis.set('article', JSON.stringify(data))
+                    return article
+                }
+            } catch (error) {
                 return error
             }
         }
