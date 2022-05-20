@@ -1,4 +1,4 @@
-const { readToken } = require("../helper/jwt");
+const { readToken } = require("../helpers/jwt");
 const { User } = require("../models/");
 
 async function authentication(req, res, next) {
@@ -17,7 +17,7 @@ async function authentication(req, res, next) {
       throw "TokenError";
     }
 
-    req.accessedUser = {
+    req.user = {
       id: userTrue.id,
       email: userTrue.email,
       name: userTrue.username,
