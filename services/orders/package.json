@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node bin/www",
     "dev": "nodemon bin/www",
-    "test": "npx jest --detectOpenHandles --forceExit --runInBand --verbose"
+    "test": "npx jest --detectOpenHandles --forceExit --runInBand --verbose --coverage"
   },
   "keywords": [],
   "author": "",

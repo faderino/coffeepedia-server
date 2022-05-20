@@ -24,45 +24,36 @@
 ### Service/ Orders
 
 /users/
-
 - POST LOGIN
 - POST REGISTER
 
 /items/
-
 - GET ALL ITEMS
 - GET ITEM BY ID
 
 /orders/
-
-- GET ORDERS -> get cart
+- GET ORDERS -> get all orders
+- GET ORDER BY ID /:id -> get single order
 - POST ORDERS /:CoffeeShopId -> ketika user menekan tombol ORDER pada detail CoffeeShop yang sedang dilihat
   - Find dulu Order dengan UserId dan CoffeeshopId yang sesuai.
   - Cari apakah ada yang statusnya "unpaid".
   - Apabila tidak ada, Order.create()
-  - Apabila ada res.status, Simpan OrderId di LocalStorage atau sejenisnya
-- DELETE ORDERS, params: OrderId -> delete from cart
+  - Apabila ada res.status
+- PATCH ORDERS /:id, body: { status: "unpaid" || "ready" || "sent" || "delivered" }
+- DELETE ORDERS /:id, params: OrderId -> delete from cart
 
 /orderDetails
-
 - POST ORDER DETAILS /:ItemId
   - params: ItemId
   - body: { quantity: 3 }
-- DELETE ORDERS, params: OrderDetailId -> delete from cart
-- PATCH ORDER, params: OrderDetailId -> increment/ decrement quantity
-
-/orders/:OrderId/status
-
-- /ready PATCH ORDERS -> mengubah status dari pesanan.
-  - params: OrderId
-  - body: {
-    status: "ready"
-    }
+- DELETE ORDERS DETAILS, params: id -> delete from cart
+- PATCH ORDER DETAILS -> increment/ decrement quantity
+  - params: id, 
+  - body: { action: "increment" || "decrement" } 
 
 ### Service/ Articles
 
 /articles/
-
 - GET ALL
 - GET BY ID
 
@@ -110,3 +101,12 @@
 ### Tracking Order
 
 -
+
+## Testing
+
+- Drop db testing: `sequelize --env test db:drop`
+- Created db testing: `sequelize --env test db:create`
+- Migrate db testing: `sequelize --env test db:migrate`
+- Seeding db testing: `sequelize --env test db:seed:all`
+- Ketika run test, app.listen nya boleh dicomment atau bikin di bin/www, di app.js lakukan module.exports = app
+- Pada package.json tambahkan script `"test": "jest --runInBand --detectOpenHandles --forceExit"`
