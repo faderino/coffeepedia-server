@@ -24,31 +24,35 @@
 ### Service/ Orders
 
 /users/
+
 - POST LOGIN
 - POST REGISTER
 
 /items/
+
 - GET ALL ITEMS
 - GET ITEM BY ID
 
 /orders/
+
 - GET ORDERS -> get cart
-- POST ORDERS -> add to cart
-  - CREATE OrderDetails dulu
-    - Data:
-      - ItemId -> dari client
-      - CoffeeShopId -> dari client ( req.body ) dari client
-      - name & price -> find Item by Id dari database
-  - CREATE Orders
-    - Data:
-      - UserId -> dari req.user.id yang sudah login
-      - OrderDetailId -> dari CREATE OrderDetails sebelumnya
-      - status = "ready" || "sent" || "delivered"
+- POST ORDERS /:CoffeeShopId -> ketika user menekan tombol ORDER pada detail CoffeeShop yang sedang dilihat
+  - Find dulu Order dengan UserId dan CoffeeshopId yang sesuai.
+  - Cari apakah ada yang statusnya "unpaid".
+  - Apabila tidak ada, Order.create()
+  - Apabila ada res.status, Simpan OrderId di LocalStorage atau sejenisnya
+- DELETE ORDERS, params: OrderId -> delete from cart
+
+/orderDetails
+
+- POST ORDER DETAILS /:ItemId
+  - params: ItemId
+  - body: { quantity: 3 }
 - DELETE ORDERS, params: OrderDetailId -> delete from cart
 - PATCH ORDER, params: OrderDetailId -> increment/ decrement quantity
 
-
 /orders/:OrderId/status
+
 - /ready PATCH ORDERS -> mengubah status dari pesanan.
   - params: OrderId
   - body: {
@@ -58,6 +62,7 @@
 ### Service/ Articles
 
 /articles/
+
 - GET ALL
 - GET BY ID
 
@@ -65,7 +70,7 @@
 
 - GET ALL PARTNER COFFEE SHOPS
   response: {
-    place_id: String
+  place_id: String
   }
 - GET NEARBY COFFEE SHOPS
 

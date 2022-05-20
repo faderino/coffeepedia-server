@@ -22,10 +22,6 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
-      CoffeeShopId: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -38,8 +34,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.STRING,
+      imageUrl: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       createdAt: {
