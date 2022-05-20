@@ -15,6 +15,14 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
+      CoffeeShopId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
