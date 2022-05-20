@@ -7,7 +7,7 @@ class Controller {
       await Coffeeshop.addCoffeeshop({ place_id, name });
       res.status(201).json({ message: "place_id added successfully" });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
 
@@ -16,7 +16,7 @@ class Controller {
       const coffeeshops = await Coffeeshop.findAll();
       res.status(200).json(coffeeshops);
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
 
@@ -26,7 +26,7 @@ class Controller {
       const coffeeshop = await Coffeeshop.findByPlaceId(place_id);
       res.status(200).json(coffeeshop);
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
 
@@ -36,7 +36,7 @@ class Controller {
       await Coffeeshop.delete(place_id);
       res.status(200).json({ message: "coffeeshop deleted successfully" });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
 }
