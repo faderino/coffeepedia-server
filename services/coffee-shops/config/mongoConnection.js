@@ -1,6 +1,12 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-const uri = 'mongodb+srv://kebaboyegaming2:Ayano140518@cluster0.kjyeq.mongodb.net/?retryWrites=true&w=majority';
+let uri = ''
+
+if(process.env.NODE_ENV === 'production') {
+  uri = 'mongodb+srv://kebaboyegaming2:Ayano140518@cluster0.kjyeq.mongodb.net/?retryWrites=true&w=majority'
+} else {
+  uri = 'mongodb://localhost:27017'
+}
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -20,5 +26,6 @@ function getDb () {
 
 module.exports = {
   connection,
-  getDb
+  getDb,
+  client
 }
