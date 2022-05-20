@@ -1,11 +1,10 @@
-const seedArticles = require('./articles.json');
-const { connection, getDB } = require('../config/connection.js');
+const seedArticles = require('./Dataarticles');
+// const { connection, getDB } = require('../config/connection.js');
 
 
 async function doSeedArticle() {
-    const db = getDB()
-    await db.collection('articles').insertMany(seedArticles)
-    console.log(seedArticles);
+    const data = JSON.parse(seedArticles)
+    console.log(data);
     console.log('masuk seed')
 }
 

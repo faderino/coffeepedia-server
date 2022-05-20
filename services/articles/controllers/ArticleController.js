@@ -7,6 +7,7 @@ class ArticleController {
             if (!response) {
                 throw { name: "Data not found" }
             }
+            console.log(response);
             res.status(200).json(response)
         } catch (error) {
             next(error)
