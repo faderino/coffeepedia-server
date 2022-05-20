@@ -34,7 +34,7 @@ class ControllerOrderDetail {
 
         response = await OrderDetail.create(data);
       }
-
+      //
       delete response.dataValues.createdAt;
       delete response.dataValues.updatedAt;
 
