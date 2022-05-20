@@ -10,5 +10,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.7.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0",
+    "ioredis": "^5.0.5"
+  }
 }
