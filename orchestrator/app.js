@@ -38,7 +38,6 @@ const typeDefs = gql`
         author: String
         tag : [String]
         createdAt : Date
-
     }
 
     type Query{
