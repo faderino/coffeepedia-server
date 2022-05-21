@@ -92,7 +92,7 @@ class ControllerOrder {
   static async getById(req, res, next) {
     try {
       const { id } = req.params;
-      const order = await Order.findByPk(+id);
+      const order = await Order.findByPk(+id, { include: OrderDetail });
       if (!order) throw "DataNotFound";
 
       res.status(200).json(order);

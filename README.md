@@ -24,14 +24,17 @@
 ### Service/ Orders
 
 /users/
+
 - POST LOGIN
 - POST REGISTER
 
 /items/
+
 - GET ALL ITEMS
 - GET ITEM BY ID
 
 /orders/
+
 - GET ORDERS -> get all orders
 - GET ORDER BY ID /:id -> get single order
 - POST ORDERS /:CoffeeShopId -> ketika user menekan tombol ORDER pada detail CoffeeShop yang sedang dilihat
@@ -43,17 +46,19 @@
 - DELETE ORDERS /:id, params: OrderId -> delete from cart
 
 /orderDetails
+
 - POST ORDER DETAILS /:ItemId
   - params: ItemId
   - body: { quantity: 3 }
 - DELETE ORDERS DETAILS, params: id -> delete from cart
 - PATCH ORDER DETAILS -> increment/ decrement quantity
-  - params: id, 
-  - body: { action: "increment" || "decrement" } 
+  - params: id,
+  - body: { action: "increment" || "decrement" }
 
 ### Service/ Articles
 
 /articles/
+
 - GET ALL
 - GET BY ID
 
