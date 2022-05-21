@@ -8,7 +8,6 @@ class ControllerOrder {
     try {
       const { id } = req.params;
       const UserId = req.user.id;
-      // const UserId = 1; buat test orchestrator
 
       let response = await Order.findOne(
         {
