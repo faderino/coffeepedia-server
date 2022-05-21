@@ -2,7 +2,8 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 
-const { gql, ApolloServer } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
+const typeDefs = require('./typeDefs');
 const { GraphQLScalarType, Kind } = require('graphql')
 const PORT = process.env.PORT || 4000;
 
@@ -29,89 +30,6 @@ const dateScalar = new GraphQLScalarType({
     },
 });
 
-const typeDefs = gql`
-    scalar Date
-
-    type Article {
-        _id : ID
-        title : String
-        content : String
-        imageUrl : [String]
-        author: String
-        tag : [String]
-        createdAt : Date
-    }
-
-    type Item{
-        id: ID
-        CategoryId: Int
-        name: String
-        price: Int
-        description : String
-        imageUrl : String
-        errorText : String
-    }
-
-    type OrderDetail{
-        id: ID
-        ItemId: Int
-        OrderId : Int
-        name : String
-        price : Int 
-        quantity : Int 
-        imageUrl : String 
-        createdAt : Date
-        updatedAt : Date
-    }
-
-    type Order{
-        id: ID
-        UserId: Int
-        CoffeeShopId: String
-        status: String
-        createdAt: Date
-        updatedAt: Date
-        OrderDetails: [OrderDetail]
-        errorText : String
-    }
-
-    type Response{
-        message : [String]
-    }
-
-    type Query{
-        getAllArticle : [Article]
-        getArticleById(_id:ID): Article
-        getAllItem : [Item]
-        getItemById(id:ID) : Item
-        getAllOrder: [Order]
-        getOrderById(id:ID): Order
-    }
-
-    type Mutation{
-
-        RegisterUser(
-            username : String
-            email : String
-            password : String
-            phoneNumber: String
-            address : String
-        ): Response
-
-        LoginUser(
-            email : String
-            password : String
-        ) : Response
-
-        AddOrder(
-            id: String
-        ): Response
-
-        DeleteOrder(id : ID): Response
-    }
-
-
-`
 const resolvers = {
     Date: dateScalar,
     Query: {
@@ -321,6 +239,7 @@ const resolvers = {
                     url: `${urlOrder}/orders/${args.id}`,
                     method: "POST",
                 })
+                redis.del("order")
                 return { message: [data.message] }
             } catch (error) {
                 return { message: [error.response.data.message] }
@@ -333,6 +252,61 @@ const resolvers = {
                     method: "DELETE",
                 })
                 redis.del("order")
+                return { message: [data.message] }
+            } catch (error) {
+                return { message: [error.response.data.message] }
+            }
+        },
+        UpdateOrder: async (_, args) => {
+            console.log(args);
+            try {
+                const { id, status } = args
+                const { data } = await axios({
+                    url: `${urlOrder}/orders/${id}`,
+                    method: "PATCH",
+                    data: { status }
+                })
+                redis.del('order')
+                return { message: [data.message] }
+            } catch (error) {
+                return { message: [error.response.data.message] }
+            }
+        },
+        // ! ORDER DETAIL
+        AddOrderDetail: async (_, args) => {
+            const { id, quantity, OrderId, name, price, imageUrl } = args
+            try {
+                const { data } = await axios({
+                    url: `${urlOrder}/orderDetails/${args.id}`,
+                    method: "POST",
+                    data: {
+                        id, quantity, OrderId, name, price, imageUrl
+                    }
+                })
+                return { message: [data.message] }
+            } catch (error) {
+                return { message: [error.response.data.message, "Item already in cart"] }
+            }
+        },
+        DeleteOrderDetail: async (_, args) => {
+            try {
+                const { data } = await axios({
+                    url: `${urlOrder}/orderDetails/${args.id}`,
+                    method: "DELETE"
+                })
+                return { message: [data.message] }
+            } catch (error) {
+                return { message: [error.response.data.message] }
+            }
+        },
+        UpdateOrderDetail: async (_, args) => {
+            const { id, action, quantity } = args
+            try {
+                const { data } = await axios({
+                    url: `${urlOrder}/orderDetails/${id}`,
+                    method: "PATCH",
+                    data: { action, quantity }
+                })
                 return { message: [data.message] }
             } catch (error) {
                 return { message: [error.response.data.message] }
