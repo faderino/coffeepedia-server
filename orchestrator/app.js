@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 4000;
 
 const redis = require("./config/connection");
 const axios = require("axios");
-const baseUrlArticle = 'http://localhost:4001'
+
+const urlArticle = 'http://localhost:4001'
+const urlOrder = 'http://localhost:4003'
 
 const dateScalar = new GraphQLScalarType({
     name: 'Date',
@@ -40,14 +42,49 @@ const typeDefs = gql`
         createdAt : Date
     }
 
+    type Item{
+        id: ID
+        CategoryId: Int
+        name: String
+        price: Int
+        description : String
+        imageUrl : String
+        errorText : String
+    }
+
+    type Response{
+        message : [String]
+    }
+
     type Query{
         getAllArticle : [Article]
         getArticleById(_id:ID): Article
+        getAllItem : [Item]
+        getItemById(id:ID) : Item
     }
+
+    type Mutation{
+
+        RegisterUser(
+            username : String
+            email : String
+            password : String
+            phoneNumber: String
+            address : String
+        ): Response
+
+        LoginUser(
+            email : String
+            password : String
+        ) : Response
+    }
+
+
 `
 const resolvers = {
     Date: dateScalar,
     Query: {
+        // ! ARTICLE
         getAllArticle: async () => {
             try {
                 const articlesCache = await redis.get('articles')
@@ -55,7 +92,7 @@ const resolvers = {
                 if (!articlesCache) {
                     console.log('no redis get');
                     const { data } = await axios({
-                        url: `${baseUrlArticle}/articles`,
+                        url: `${urlArticle}/articles`,
                         method: 'GET'
                     })
                     articles = data
@@ -82,7 +119,7 @@ const resolvers = {
                         // console.log('redis ada, tp data beda')
                         redis.del('article')
                         const { data } = await axios({
-                            url: `${baseUrlArticle}/article/${args._id}`,
+                            url: `${urlArticle}/article/${args._id}`,
                             method: "GET"
                         })
                         article = data
@@ -92,7 +129,7 @@ const resolvers = {
                 } else {
                     // console.log('fetch baru by id');
                     const { data } = await axios({
-                        url: `${baseUrlArticle}/article/${args._id}`,
+                        url: `${urlArticle}/article/${args._id}`,
                         method: "GET"
                     })
                     article = data
@@ -102,11 +139,95 @@ const resolvers = {
             } catch (error) {
                 return error
             }
-        }
+        },
+        // ! ITEM
+        getAllItem: async () => {
+            try {
+                const itemsCahce = await redis.get('items')
+                let items = JSON.parse(itemsCahce)
+                if (!itemsCahce) {
+                    console.log('no redis get');
+                    const { data } = await axios({
+                        url: `${urlOrder}/items`,
+                        method: 'GET'
+                    })
+                    items = data
+                    redis.set('items', JSON.stringify(data))
+                    return items
+                } else {
+                    console.log('ready in redis')
+                    return items
+                }
+            } catch (error) {
+                console.log(error)
+                return error
+            }
+        },
+        getItemById: async (_, args) => {
+            try {
+                const itemCache = await redis.get('item')
+                let item = JSON.parse(itemCache)
+                if (itemCache) {
+                    if (item.id === args.id) {
+                        return item
+                    } else {
+                        redis.del('item')
+                        const { data } = await axios({
+                            url: `${urlOrder}/items/${args.id}`,
+                            method: "GET"
+                        })
+                        item = data
+                        redis.set('item', JSON.stringify(data))
+                        return item
+                    }
+                } else {
+                    const { data } = await axios({
+                        url: `${urlOrder}/items/${args.id}`,
+                        method: "GET"
+                    })
+                    item = data
+                    redis.set('item', JSON.stringify(data))
+                    return item
+                }
+            } catch (error) {
+                console.log(error.response.data.message);
+                return { errorText: error.response.data.message }
+            }
+        },
     },
-    // Mutation: {
-
-    // }
+    Mutation: {
+        RegisterUser: async (_, args) => {
+            const { username, email, password, phoneNumber, address } = args;
+            console.log(username, email, password, phoneNumber, address)
+            try {
+                await axios({
+                    url: `${urlOrder}/register`,
+                    method: "POST",
+                    data: {
+                        username, email, password, phoneNumber, address
+                    }
+                })
+                return { message: ["Success Register"] }
+            } catch (error) {
+                return { message: error.response.data.message }
+            }
+        },
+        LoginUser: async (_, args) => {
+            const { email, password } = args;
+            try {
+                await axios({
+                    url: `${urlOrder}/login`,
+                    method: "POST",
+                    data: {
+                        email, password
+                    }
+                })
+                return { message: ["Success Login"] }
+            } catch (error) {
+                return { message: [error.response.data.message] }
+            }
+        }
+    }
 
 }
 
