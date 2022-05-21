@@ -32,28 +32,24 @@
 - GET ITEM BY ID
 
 /orders/
-- GET ORDERS -> get cart
-- POST ORDERS -> add to cart
-  - CREATE OrderDetails dulu
-    - Data:
-      - ItemId -> dari client
-      - CoffeeShopId -> dari client ( req.body ) dari client
-      - name & price -> find Item by Id dari database
-  - CREATE Orders
-    - Data:
-      - UserId -> dari req.user.id yang sudah login
-      - OrderDetailId -> dari CREATE OrderDetails sebelumnya
-      - status = "ready" || "sent" || "delivered"
-- DELETE ORDERS, params: OrderDetailId -> delete from cart
-- PATCH ORDER, params: OrderDetailId -> increment/ decrement quantity
+- GET ORDERS -> get all orders
+- GET ORDER BY ID /:id -> get single order
+- POST ORDERS /:CoffeeShopId -> ketika user menekan tombol ORDER pada detail CoffeeShop yang sedang dilihat
+  - Find dulu Order dengan UserId dan CoffeeshopId yang sesuai.
+  - Cari apakah ada yang statusnya "unpaid".
+  - Apabila tidak ada, Order.create()
+  - Apabila ada res.status
+- PATCH ORDERS /:id, body: { status: "unpaid" || "ready" || "sent" || "delivered" }
+- DELETE ORDERS /:id, params: OrderId -> delete from cart
 
-
-/orders/:OrderId/status
-- /ready PATCH ORDERS -> mengubah status dari pesanan.
-  - params: OrderId
-  - body: {
-    status: "ready"
-    }
+/orderDetails
+- POST ORDER DETAILS /:ItemId
+  - params: ItemId
+  - body: { quantity: 3 }
+- DELETE ORDERS DETAILS, params: id -> delete from cart
+- PATCH ORDER DETAILS -> increment/ decrement quantity
+  - params: id, 
+  - body: { action: "increment" || "decrement" } 
 
 ### Service/ Articles
 
@@ -65,7 +61,7 @@
 
 - GET ALL PARTNER COFFEE SHOPS
   response: {
-    place_id: String
+  place_id: String
   }
 - GET NEARBY COFFEE SHOPS
 
@@ -105,3 +101,12 @@
 ### Tracking Order
 
 -
+
+## Testing
+
+- Drop db testing: `sequelize --env test db:drop`
+- Created db testing: `sequelize --env test db:create`
+- Migrate db testing: `sequelize --env test db:migrate`
+- Seeding db testing: `sequelize --env test db:seed:all`
+- Ketika run test, app.listen nya boleh dicomment atau bikin di bin/www, di app.js lakukan module.exports = app
+- Pada package.json tambahkan script `"test": "jest --runInBand --detectOpenHandles --forceExit"`
