@@ -4,41 +4,38 @@ function errorHandler(error, req, res, next) {
     res.status(401).json({
       message: "Email or Password invalid",
     });
-  } else if (error.name === "SequelizeForeignKeyConstraintError") {
-    res.status(404).json({ message: `DATA NOT FOUND` });
-  } else if (error === "PageMustNotBeNegative") {
-    res
-      .status(401)
-      .json({ message: "Page must be greater than or equal to 0" });
-  } else if (error === "TokenError") {
+  }
+  // else if (error === "PageMustNotBeNegative") {
+  //   res
+  //     .status(401)
+  //     .json({ message: "Page must be greater than or equal to 0" });
+  // }
+  else if (
+    error === "TokenError" ||
+    error.message === "invalid signature" ||
+    error.message === "invalid token" ||
+    error.message === "jwt must be provided"
+  ) {
     res.status(401).json({
       message: "Unauthorized",
     });
-  } else if (error.message === "invalid signature") {
-    res.status(401).json({
-      message: "Unauthorized",
-    });
-  } else if (error.message === "invalid token") {
-    res.status(401).json({
-      message: "Unauthorized",
-    });
-  } else if (error.message === "jwt must be provided") {
-    res.status(401).json({
-      message: "Unauthorized",
-    });
-  } else if (error === "Forbidden") {
-    res.status(403).json({
-      message: "Forbidden",
-    });
-  } else if (error === "DataNotFound") {
+  }
+  // else if (error === "Forbidden") {
+  //   res.status(403).json({
+  //     message: "Forbidden",
+  //   });
+  // }
+  else if (error === "DataNotFound") {
     res.status(404).json({
       message: `DATA NOT FOUND`,
     });
-  } else if (error === "StatusForbidden") {
-    res.status(400).json({
-      message: `Status Forbidden`,
-    });
-  } else if (error.name === "SequelizeValidationError") {
+  }
+  // else if (error === "StatusForbidden") {
+  //   res.status(400).json({
+  //     message: `Status Forbidden`,
+  //   });
+  // }
+  else if (error.name === "SequelizeValidationError") {
     error.errors.forEach((el) => {
       arrError.push(el.message);
     });
@@ -51,6 +48,11 @@ function errorHandler(error, req, res, next) {
     });
     res.status(400).json({
       message: arrError,
+    });
+  } else if (error.message === "DUPLICATE ORDER") {
+    res.status(400).json({
+      message: `Item sudah ada dikerjanjang. perbaharui isi keranjang?`,
+      isOrdered: "true",
     });
   } else {
     res.status(500).json({

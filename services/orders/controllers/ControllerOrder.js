@@ -8,7 +8,7 @@ class ControllerOrder {
     try {
       const { id } = req.params;
       const UserId = req.user.id;
-
+      let resStatus = 200;
       let response = await Order.findOne(
         {
           where: {
@@ -35,6 +35,7 @@ class ControllerOrder {
         response = await Order.create(data, { transaction: t });
 
         if (response) {
+          resStatus = 201;
           send = {
             message: "Cart Created Success",
             response,
@@ -47,7 +48,7 @@ class ControllerOrder {
 
       await t.commit();
 
-      res.status(200).json(send);
+      res.status(resStatus).json(send);
     } catch (err) {
       await t.rollback();
 
@@ -91,7 +92,7 @@ class ControllerOrder {
   static async getById(req, res, next) {
     try {
       const { id } = req.params;
-      const order = await Order.findByPk(+id);
+      const order = await Order.findByPk(+id, { include: OrderDetail });
       if (!order) throw "DataNotFound";
 
       res.status(200).json(order);

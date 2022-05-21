@@ -3,7 +3,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 let uri = ''
 
 if(process.env.NODE_ENV === 'production') {
-  uri = 'mongodb+srv://kebaboyegaming2:Ayano140518@cluster0.kjyeq.mongodb.net/?retryWrites=true&w=majority'
+  uri = process.env.MONGO_DB_URI
 } else {
   uri = 'mongodb://localhost:27017'
 }
