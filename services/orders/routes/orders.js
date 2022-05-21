@@ -4,7 +4,7 @@ const app = require("../app");
 const Order = require("../controllers/ControllerOrder");
 const { authentication } = require("../middlewares/auth");
 
-router.use(authentication);
+// router.use(authentication);
 
 router.get("/", Order.getAll);
 router.get("/:id", Order.getById);
