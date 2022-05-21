@@ -3,8 +3,6 @@ const errorHandler = async (error, req, res, next) => {
         case "Data not found":
             res.status(404).json({ message: error.name })
             break;
-        default:
-            break;
     }
 }
 
