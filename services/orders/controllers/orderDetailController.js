@@ -1,5 +1,5 @@
 "use strict";
-const { OrderDetail, sequelize } = require("../models/index");
+const { OrderDetail } = require("../models/index");
 module.exports = class Controller {
   static async add(req, res, next) {
     try {
@@ -15,8 +15,7 @@ module.exports = class Controller {
 
       if (response) {
         throw {
-          message: "Item sudah ada dikerjanjang. perbaharui isi keranjang?",
-          isOrdered: "true",
+          message: "DUPLICATE ORDER",
         };
       }
 
@@ -36,8 +35,7 @@ module.exports = class Controller {
       delete response.dataValues.createdAt;
       delete response.dataValues.updatedAt;
 
-      res.status(200).json({
-        statusCode: 201,
+      res.status(201).json({
         message: "OrderDetail Created Success",
         response,
       });
@@ -76,7 +74,6 @@ module.exports = class Controller {
         });
         newQty += 1;
       } else if (action === "decrement") {
-        console.log(action);
         await OrderDetail.decrement("quantity", {
           by: 1,
           where: {
