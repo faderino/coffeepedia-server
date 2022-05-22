@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../app");
 const { createToken } = require("../helpers/jwt");
-const { Order, Category, User, Item } = require("../models/index");
+const { User } = require("../models/index");
 
 let accesstoken;
 
@@ -23,39 +23,9 @@ beforeAll(async () => {
   };
 
   accesstoken = createToken(payload);
-
-  await Category.create({
-    name: "Kopi",
-  });
-  await Item.create({
-    CategoryId: 1,
-    name: "Kopi",
-    price: "25000",
-    description: "Kopi dan Susu Bersatu",
-    imageUrl: "www.google.com",
-  });
-
-  await Order.create({
-    UserId: 1,
-    CoffeeShopId: "Idnomor1darigoogle",
-    status: "unpaid",
-  });
 }, 30000);
 
 afterAll(async () => {
-  await Order.truncate({
-    cascade: true,
-    restartIdentity: true,
-  });
-
-  await Item.truncate({
-    cascade: true,
-    restartIdentity: true,
-  });
-  await Category.truncate({
-    cascade: true,
-    restartIdentity: true,
-  });
   await User.truncate({
     cascade: true,
     restartIdentity: true,
