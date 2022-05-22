@@ -2,12 +2,12 @@ const { getCurrentTimestamp, snap } = require("../helpers/Midtrans");
 class PaymentController {
   static async midTrans(req, res, next) {
     try {
-      const { email, amount } = req.body;
+      const { email, totalPrice } = req.body;
       let id = "donate-" + getCurrentTimestamp();
       let parameter = {
         transaction_details: {
           order_id: id,
-          gross_amount: amount,
+          gross_amount: totalPrice,
         },
         credit_card: {
           secure: true,

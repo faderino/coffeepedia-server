@@ -94,11 +94,21 @@ const typeDefs = gql`
         icon_background_color: String
         icon_mask_base_uri: String
         opening_hours: Opening_hours
+    }
 
+    type CoffeeShop{
+        _id: String
+        place_id : String
+        name: String
     }
 
     type Response{
         message : [String]
+    }
+
+    type PaymentResponse{
+        token: String
+        redirect_url : String
     }
 
     type Query{
@@ -112,6 +122,10 @@ const typeDefs = gql`
             latitude: String
             longitude: String
             ) : [Maps]
+        getAllCoffeeShop: [CoffeeShop]
+        getCoffeeShopById(
+            place_id: String
+        ): CoffeeShop
     }
 
     type Mutation{
@@ -155,7 +169,20 @@ const typeDefs = gql`
             action: String
             quantity: Int
         ) : Response
+        
+        AddCoffeeShop(
+            place_id: String
+            name: String
+        ) : Response
 
+        DeleteCoffeeShop(
+            place_id: String
+        ) : Response
+
+        DoPayment(
+            email: String
+            totalPrice: Int 
+        ): PaymentResponse
     }
 `
 

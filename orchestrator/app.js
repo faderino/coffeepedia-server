@@ -11,7 +11,7 @@ const redis = require("./config/connection");
 const axios = require("axios");
 
 const urlArticle = 'http://localhost:4001'
-const urlMaps = 'http://localhost:4002'
+const urlCoffeeShop = 'http://localhost:4002'
 const urlOrder = 'http://localhost:4003'
 
 const dateScalar = new GraphQLScalarType({
@@ -205,10 +205,63 @@ const resolvers = {
             console.log(args);
             try {
                 const { data } = await axios({
-                    url: `${urlMaps}/maps/nearbySearch?latitude=${args.latitude}&longitude=${args.longitude}`,
+                    url: `${urlCoffeeShop}/maps/nearbySearch?latitude=${args.latitude}&longitude=${args.longitude}`,
                     method: "GET"
                 })
                 return data
+            } catch (error) {
+                return error
+            }
+        },
+        // !COFFEE SHOP
+        getAllCoffeeShop: async () => {
+            try {
+                const coffeeShopesCache = await redis.get('coffeeShops')
+                let coffeeShops = JSON.parse(coffeeShopesCache)
+                if (!coffeeShopesCache) {
+                    const { data } = await axios({
+                        url: `${urlCoffeeShop}/coffeeshops`,
+                        method: "GET"
+                    })
+                    coffeeShops = data
+                    redis.set('coffeeShops', JSON.stringify(data))
+                    return data
+                } else {
+                    return coffeeShops
+                }
+            } catch (error) {
+                return error
+            }
+        },
+        getCoffeeShopById: async (_, args) => {
+            try {
+                const coffeeShopCache = await redis.get("coffeeShop")
+                let coffeeShop = JSON.parse(coffeeShopCache)
+                if (coffeeShopCache) {
+                    if (coffeeShop.place_id === args.place_id) {
+                        // console.log('data sama');
+                        return coffeeShop
+                    } else {
+                        redis.del('coffeeShop')
+                        // console.log('data ada tapi beda');
+                        const { data } = await axios({
+                            url: `${urlCoffeeShop}/coffeeshops/${args.place_id}`,
+                            method: "GET"
+                        })
+                        coffeeShop = data
+                        redis.set('coffeeShop', JSON.stringify(data))
+                        return coffeeShop
+                    }
+                } else {
+                    // console.log('data belum ada');
+                    const { data } = await axios({
+                        url: `${urlCoffeeShop}/coffeeshops/${args.place_id}`,
+                        method: "GET"
+                    })
+                    coffeeShop = data
+                    redis.set('coffeeShop', JSON.stringify(data))
+                    return coffeeShop
+                }
             } catch (error) {
                 return error
             }
@@ -326,8 +379,50 @@ const resolvers = {
                 return { message: [error.response.data.message] }
             }
         },
+        // ! COFFEE SHOP
+        AddCoffeeShop: async (_, args) => {
+            const { place_id, name } = args
+            try {
+                const { data } = await axios({
+                    url: `${urlCoffeeShop}/coffeeshops/addCoffeeshop`,
+                    method: "POST",
+                    data: {
+                        place_id, name
+                    }
+                })
+                redis.del("coffeeShops")
+                return { message: [data.message] }
+            } catch (error) {
+                return { message: [error.response.data.error.message] }
+            }
+        },
+        DeleteCoffeeShop: async (_, args) => {
+            try {
+                const { data } = await axios({
+                    url: `${urlCoffeeShop}/coffeeshops/delete/${args.place_id}`,
+                    method: "DELETE",
+                })
+                redis.del("coffeeShops")
+                return { message: [data.message] }
+            } catch (error) {
+                return { message: [error.response.data.error.message] }
+            }
+        },
+        // ! PAYMENT
+        DoPayment: async (_, args) => {
+            const { email, totalPrice } = args
+            try {
+                const { data } = await axios({
+                    url: `${urlOrder}/payments`,
+                    method: 'POST',
+                    data: { email, totalPrice }
+                })
+                return data
+            } catch (error) {
+                return error
+            }
+        }
     }
-
 }
 
 const server = new ApolloServer({
