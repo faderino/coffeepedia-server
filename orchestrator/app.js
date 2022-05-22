@@ -46,6 +46,7 @@ const resolvers = {
                     })
                     articles = data
                     redis.set('articles', JSON.stringify(data))
+                    console.log(data);
                     return articles
                 } else {
                     return articles
@@ -120,7 +121,7 @@ const resolvers = {
                             url: `${urlOrder}/items/${args.id}`,
                             method: "GET"
                         })
-                        item = data
+                        item = data.Item
                         redis.set('item', JSON.stringify(data))
                         return item
                     }
@@ -131,7 +132,7 @@ const resolvers = {
                     })
                     item = data
                     redis.set('item', JSON.stringify(data))
-                    return item
+                    return item.Item
                 }
             } catch (error) {
                 return { errorText: error.response.data.message }
@@ -261,6 +262,26 @@ const resolvers = {
                     coffeeShop = data
                     redis.set('coffeeShop', JSON.stringify(data))
                     return coffeeShop
+                }
+            } catch (error) {
+                return error
+            }
+        },
+        // ! CATEGORY
+        getAllCategory: async () => {
+            try {
+                const categoriesCache = await redis.get("categories")
+                let categories = JSON.parse(categoriesCache)
+                if (!categoriesCache) {
+                    const { data } = await axios({
+                        url: `${urlOrder}/categories`,
+                        method: "GET",
+                    })
+                    categories = data
+                    redis.set('categories', JSON.stringify(data))
+                    return categories
+                } else {
+                    return categories
                 }
             } catch (error) {
                 return error

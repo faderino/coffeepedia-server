@@ -9,8 +9,8 @@ beforeAll(async () => {
 describe('Article - Success Test', () => {
     it('Get All Article - Return Array of Object', async () => {
         const res = await request(app).get('/articles')
-        console.log(res, '<<<<');
         expect(res.status).toBe(200)
+        expect(Array.isArray(res.body)).toBeTruthy();
         expect([
             {
                 "_id": "6286f47740b46524b6a6c39c",
@@ -88,10 +88,19 @@ describe('Article - Success Test', () => {
 
 describe('Article - Success Test', () => {
     it('Get article by id - Object of Article', async () => {
-        const res = await request(app).get('/article/62876183896593db28ce8238')
-        expect(res.status).toBe(200)
+        const res = await request(app).get('/article/6286f47740b46524b6a6c39c')
         const expected = ['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']
+        expect(res.status).toBe(200)
         expect(['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']).toEqual(expect.arrayContaining(expected))
+    })
+})
+
+describe('Article - Fail Test', () => {
+    it('Get all article - data not found', async () => {
+        const res = await request(app).get('/articles')
+        expect(res.status).toBe(200)
+        expect(typeof res.body).toBe("object");
+        expect([]).toHaveLength(0)
     })
 })
 
@@ -101,7 +110,10 @@ describe('Article - Fail Test', () => {
         console.log(res);
         expect(res.status).toBe(404)
         const expected = { message: "Data not found" }
+        const expectedA = ['message']
+        expect(['message']).toEqual(expect.arrayContaining(expectedA))
         expect(expected.message).toBe("Data not found")
-        // expect({message})
+        expect(res.body).toHaveProperty("message")
+        expect(typeof res.body).toBe("object")
     })
 })

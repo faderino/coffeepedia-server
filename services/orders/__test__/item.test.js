@@ -1,28 +1,8 @@
 const request = require("supertest");
 const app = require("../app");
-const { createToken } = require("../helpers/jwt");
-const { Order, Category, User, Item } = require("../models/index");
-let accesstoken;
-
-const userData = {
-  email: "admin@gmail.com",
-  password: "admin",
-  username: "admin",
-  phoneNumber: "088888888888",
-  address: "Bandung",
-  balance: 0,
-};
+const { Category, Item } = require("../models/index");
 
 beforeAll(async () => {
-  const user = await User.create(userData);
-
-  const payload = {
-    id: user.id,
-    email: user.email,
-  };
-
-  accesstoken = createToken(payload);
-
   await Category.create({
     name: "Kopi",
   });
@@ -36,11 +16,6 @@ beforeAll(async () => {
 }, 30000);
 
 afterAll(async () => {
-  await Order.truncate({
-    cascade: true,
-    restartIdentity: true,
-  });
-
   await Item.truncate({
     cascade: true,
     restartIdentity: true,
@@ -49,18 +24,11 @@ afterAll(async () => {
     cascade: true,
     restartIdentity: true,
   });
-  await User.truncate({
-    cascade: true,
-    restartIdentity: true,
-  });
 }, 30000);
 
 describe("Item Test", () => {
   it("should return all Items", async () => {
-    const res = await request(app)
-      .get("/items")
-      .set("accesstoken", accesstoken)
-      .expect(200);
+    const res = await request(app).get("/items").expect(200);
 
     expect(res.body).toEqual(expect.any(Array));
     expect(res.body[0]).toEqual(expect.any(Object));
@@ -73,10 +41,7 @@ describe("Item Test", () => {
   });
 
   it("should return one Item", async () => {
-    const res = await request(app)
-      .get("/items/1")
-      .set("accesstoken", accesstoken)
-      .expect(200);
+    const res = await request(app).get("/items/1").expect(200);
 
     const response = res.body.Item;
 
@@ -91,10 +56,7 @@ describe("Item Test", () => {
   });
 
   it("should fail find one Items", async () => {
-    const res = await request(app)
-      .get("/items/1000")
-      .set("accesstoken", accesstoken)
-      .expect(404);
+    const res = await request(app).get("/items/1000").expect(404);
 
     expect(res.body).toEqual(expect.any(Object));
     expect(res.body.message).toBe(`DATA NOT FOUND`);
