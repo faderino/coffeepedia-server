@@ -24,6 +24,28 @@ class Article {
             console.log(error)
         }
     }
+    static async addArticle(data) {
+        try {
+            const {
+                title,
+                content,
+                imageUrl,
+                author,
+                tag,
+                createdAt
+            } = data
+            const response = await this.article().insertOne({
+                title,
+                content,
+                imageUrl,
+                author,
+                tag,
+                createdAt
+            })
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 module.exports = Article
