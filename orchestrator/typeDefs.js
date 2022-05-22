@@ -7,10 +7,15 @@ const typeDefs = gql`
         _id : ID
         title : String
         content : String
-        imageUrl : String
+        imageUrl : [String]
         author: String
         tag : [String]
         createdAt : Date
+    }
+    
+    type Category{
+        id:ID
+        name: String
     }
 
     type Item{
@@ -126,6 +131,7 @@ const typeDefs = gql`
         getCoffeeShopById(
             place_id: String
         ): CoffeeShop
+        getAllCategory: [Category]
     }
 
     type Mutation{
@@ -188,9 +194,9 @@ const typeDefs = gql`
         AddArticle(
             title: String,
             content: String,
-            imageUrl: String,
+            imageUrl: [String],
             author: String,
-            tag: String,
+            tag: [String],
             createdAt: String
         ): Response
     }
