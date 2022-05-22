@@ -7,7 +7,7 @@ const typeDefs = gql`
         _id : ID
         title : String
         content : String
-        imageUrl : [String]
+        imageUrl : String
         author: String
         tag : [String]
         createdAt : Date
@@ -184,6 +184,15 @@ const typeDefs = gql`
             totalPrice: Int 
             OrderId: Int
         ): PaymentResponse
+
+        AddArticle(
+            title: String,
+            content: String,
+            imageUrl: String,
+            author: String,
+            tag: String,
+            createdAt: String
+        ): Response
     }
 `
 

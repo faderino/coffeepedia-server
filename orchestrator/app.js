@@ -421,6 +421,29 @@ const resolvers = {
             } catch (error) {
                 return error
             }
+        },
+        //! Article
+        AddArticle: async (_, args) => {
+            const {title,
+                content,
+                imageUrl,
+                author,
+                tag,
+                createdAt} = args
+            try {
+                const {data} = await axios.post(`${urlArticle}/add`, {
+                    title,
+                    content,
+                    imageUrl,
+                    author,
+                    tag,
+                    createdAt
+                })
+                await redis.del('articles')
+                return data
+            } catch (error) {
+                return error
+            }
         }
     }
 }
