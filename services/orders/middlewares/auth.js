@@ -23,6 +23,7 @@ async function authentication(req, res, next) {
       email: userTrue.email,
       name: userTrue.username,
     };
+    console.log(`tes detail apollo`);
     next();
   } catch (error) {
     next(error);

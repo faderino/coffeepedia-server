@@ -1,34 +1,35 @@
 if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
+  require("dotenv").config();
 }
 
 const { ApolloServer } = require("apollo-server");
-const typeDefs = require('./typeDefs');
-const { GraphQLScalarType, Kind } = require('graphql')
+const typeDefs = require("./typeDefs");
+const { GraphQLScalarType, Kind } = require("graphql");
 const PORT = process.env.PORT || 4000;
 
 const redis = require("./config/connection");
 const axios = require("axios");
+
 
 const urlArticle = 'http://localhost:4001'
 const urlCoffeeShop = 'http://localhost:4002'
 const urlOrder = 'http://localhost:4003'
 
 const dateScalar = new GraphQLScalarType({
-    name: 'Date',
-    description: 'Date custom scalar type',
-    // serialize(value) {
-    //     return value.getTime(); // Convert outgoing Date to integer for JSON
-    // },
-    parseValue(value) {
-        return new Date(value); // Convert incoming integer to Date
-    },
-    parseLiteral(ast) {
-        if (ast.kind === Kind.INT) {
-            return new Date(parseInt(ast.value, 10)); // Convert hard-coded AST string to integer and then to Date
-        }
-        return null; // Invalid hard-coded value (not an integer)
-    },
+  name: "Date",
+  description: "Date custom scalar type",
+  // serialize(value) {
+  //     return value.getTime(); // Convert outgoing Date to integer for JSON
+  // },
+  parseValue(value) {
+    return new Date(value); // Convert incoming integer to Date
+  },
+  parseLiteral(ast) {
+    if (ast.kind === Kind.INT) {
+      return new Date(parseInt(ast.value, 10)); // Convert hard-coded AST string to integer and then to Date
+    }
+    return null; // Invalid hard-coded value (not an integer)
+  },
 });
 
 const resolvers = {
@@ -266,7 +267,11 @@ const resolvers = {
                 return error
             }
         }
+      } catch (error) {
+        return error;
+      }
     },
+
     Mutation: {
         // ! USER
         RegisterUser: async (_, args) => {
@@ -426,12 +431,12 @@ const resolvers = {
 }
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    playground: true,
-    introspection: true,
+  typeDefs,
+  resolvers,
+  playground: true,
+  introspection: true,
 });
 
 server.listen(PORT).then(({ url }) => {
-    console.log(`running => ${url}`);
+  console.log(`running => ${url}`);
 });
