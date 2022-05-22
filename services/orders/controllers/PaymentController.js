@@ -2,11 +2,11 @@ const { getCurrentTimestamp, snap } = require("../helpers/Midtrans");
 class PaymentController {
   static async midTrans(req, res, next) {
     try {
-      const { email, totalPrice } = req.body;
-      let id = "donate-" + getCurrentTimestamp();
+      const { email, totalPrice, OrderId } = req.body;
+
       let parameter = {
         transaction_details: {
-          order_id: id,
+          order_id: OrderId,
           gross_amount: totalPrice,
         },
         credit_card: {
@@ -16,6 +16,8 @@ class PaymentController {
           email: email,
         },
       };
+
+      console.log(parameter);
 
       let donation = await snap.createTransaction(parameter);
 
