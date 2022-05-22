@@ -1,8 +1,8 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-let uri = ''
+let uri = process.env.MONGO_DB_URI
 
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   uri = process.env.MONGO_DB_URI
 } else {
   uri = 'mongodb://localhost:27017'
@@ -11,16 +11,16 @@ if(process.env.NODE_ENV === 'production') {
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 let db
-async function connection () {
+async function connection() {
   try {
     await client.connect()
     db = client.db("coffeepedia");
   } catch (err) {
-    console.log(err)    
+    console.log(err)
   }
 }
 
-function getDb () {
+function getDb() {
   return db
 }
 
