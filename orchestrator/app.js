@@ -410,12 +410,12 @@ const resolvers = {
         },
         // ! PAYMENT
         DoPayment: async (_, args) => {
-            const { email, totalPrice } = args
+            const { email, totalPrice, OrderId } = args
             try {
                 const { data } = await axios({
                     url: `${urlOrder}/payments`,
                     method: 'POST',
-                    data: { email, totalPrice }
+                    data: { email, totalPrice, OrderId }
                 })
                 return data
             } catch (error) {

@@ -182,6 +182,7 @@ const typeDefs = gql`
         DoPayment(
             email: String
             totalPrice: Int 
+            OrderId: Int
         ): PaymentResponse
     }
 `
