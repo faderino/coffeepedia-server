@@ -27,6 +27,30 @@ class ArticleController {
         }
     }
 
+    static async addArticle(req, res, next) {
+        try {
+            console.log()
+            const {
+                title,
+                content,
+                imageUrl,
+                author,
+                tag,
+                createdAt
+            } = req.body
+            await Article.addArticle({
+                title,
+                content,
+                imageUrl,
+                author,
+                tag: tag.split(','),
+                createdAt
+            })
+            res.status(201).json({message: ['article added successfully']})
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 module.exports = ArticleController

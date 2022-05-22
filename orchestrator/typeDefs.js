@@ -190,6 +190,15 @@ const typeDefs = gql`
             totalPrice: Int 
             OrderId: Int
         ): PaymentResponse
+
+        AddArticle(
+            title: String,
+            content: String,
+            imageUrl: [String],
+            author: String,
+            tag: [String],
+            createdAt: String
+        ): Response
     }
 `
 
