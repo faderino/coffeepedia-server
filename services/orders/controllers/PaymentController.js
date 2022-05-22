@@ -21,13 +21,9 @@ class PaymentController {
 
       let donation = await snap.createTransaction(parameter);
 
-      let token = donation.token;
-
-      let redirect_url = donation.redirect_url;
-
       res.status(200).json({
-        token,
-        redirect_url,
+        token: donation.token,
+        redirect_url: donation.redirect_url,
       });
     } catch (error) {
       next(error);
