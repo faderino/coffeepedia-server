@@ -1,0 +1,233 @@
+[
+  {
+    "name": "Caffè Americano",
+    "description": "Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance. Pro Tip: For an additional boost, ask your barista to try this with an extra shot.",
+    "price": 37000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/f12bc8af498d45ed92c5d6f1dac64062.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 1
+  },
+  {
+    "name": "Caffè Misto",
+    "description": "A one-to-one combination of fresh-brewed coffee and steamed milk add up to one distinctly delicious coffee drink remarkably mixed.",
+    "price": 42000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/d668acbc691b47249548a3eeac449916.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 2
+  },
+  {
+    "name": "Cappuccino",
+    "description": "Dark, rich espresso lies in wait under a smoothed and stretched layer of thick milk foam. An alchemy of barista artistry and craft.",
+    "price": 50000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/5c515339667943ce84dc56effdf5fc1b.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 3
+  },
+  {
+    "name": "Espresso",
+    "description": "Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.",
+    "price": 25000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/ec519dd5642c41629194192cce582135.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 4
+  },
+  {
+    "name": "Flat White",
+    "description": "Smooth ristretto shots of espresso get the perfect amount of steamed whole milk to create a not-too-strong, not-too-creamy, just-right flavor.",
+    "price": 37000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/fedee22e49724cd09fbcc7ee2e567377.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 5
+  },
+  {
+    "name": "Caffè Latte",
+    "description": "Our dark, rich espresso balanced with steamed milk and a light layer of foam. A perfect milk-forward warm-up.",
+    "price": 37000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/b635f407bbcd49e7b8dd9119ce33f76e.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 6
+  },
+  {
+    "name": "Caramel Macchiato",
+    "description": "Freshly steamed milk with vanilla-flavored syrup marked with espresso and topped with a caramel drizzle for an oh-so-sweet finish.",
+    "price": 52000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/58db701349cb48738069e8c912e2b3ac.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 7
+  },
+  {
+    "name": "Caffè Mocha",
+    "description": "Our rich, full-bodied espresso combined with bittersweet mocha sauce and steamed milk, then topped with sweetened whipped cream. The classic coffee drink that always sweetly satisfies.",
+    "price": 48000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/915736da018842e788147f7eab73db73.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 8
+  },
+  {
+    "name": "Chai Tea Latte",
+    "description": "Black tea infused with cinnamon, clove and other warming spices is combined with steamed milk and topped with foam for the perfect balance of sweet and spicy. An iconic chai cup.",
+    "price": 32000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/2d52f16a22fb40ff898be1815ecc952e.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 9
+  },
+  {
+    "name": "Earl Grey Tea",
+    "description": "We take a strong black tea base and add the essence of bergamot, a citrus fruit with subtle lemon and floral lavender notes, to create this aromatically awesome tea flavor.",
+    "price": 25000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/6f780d5d392542c6b9b1a4412881cecc.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 10
+  },
+  {
+    "name": "Matcha Tea Latte",
+    "description": "Smooth and creamy matcha sweetened just right and served with steamed milk. This favorite will transport your senses to pure green delight.",
+    "price": 30000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/8b1b6d808cca4787afd2b30cf8dd5676.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 11
+  },
+  {
+    "name": "Mint Majesty",
+    "description": "A blend of mint and a pinch of lemon verbena creates a refreshing flavor that's supercool for a caffeine-free herbal tea.",
+    "price": 27500,
+    "imageUrl": "https://globalassets.starbucks.com/assets/cf7469c84a444e4f9a341f8023558c77.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 12
+  },
+  {
+    "name": "Hot Chocolate",
+    "description": "Steamed milk and mocha sauce topped with sweetened whipped cream and a chocolate-flavored drizzle. A timeless classic made to sweeten your spirits..",
+    "price": 48500,
+    "imageUrl": "https://globalassets.starbucks.com/assets/677d276173ec4bc192c2b9a21776339f.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 13
+  },
+  {
+    "name": "Caramel Apple Spice",
+    "description": "Steamed apple juice complemented with cinnamon syrup, whipped cream and a caramel sauce drizzle.",
+    "price": 52000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/39bab62a29214270b6b30eb838e2c5a6.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 14
+  },
+  {
+    "name": "Cinnamon Dolce Crème",
+    "description": "We combine freshly steamed milk and cinnamon dolce–flavored syrup, topped with sweetened whipped cream and a cinnamon dolce topping to give you a creamy, special treat.",
+    "price": 44000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/5cf3b6ac58684727a0f7b13cb3544dd6.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 15
+  },
+  {
+    "name": "Mocha Cookie Crumble",
+    "description": "Frappuccino® Roast coffee, mocha sauce and Frappuccino® chips blended with milk and ice, layered on top of whipped cream and chocolate cookie crumble and topped with vanilla whipped cream, mocha drizzle and even more chocolate cookie crumble. Each sip is as good as the last . . . all the way to the end.",
+    "price": 42000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/1fd99578d31f4072a52892398d8f1fa8.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 16
+  },
+  {
+    "name": "Vanilla Bean Crème",
+    "description": "This rich and creamy blend of vanilla bean, milk and ice topped with whipped cream takes va-va-vanilla flavor to another level. To change things up, try it affogato-style with a hot espresso shot poured right over the top.",
+    "price": 38500,
+    "imageUrl": "https://globalassets.starbucks.com/assets/b7b496402286415c9c2be5bc1b4d7c3e.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 17
+  },
+  {
+    "name": "Salted Caramel Cream Cold Brew",
+    "description": "Here's a savory-meets-sweet refreshing beverage certain to delight: our signature, super-smooth cold brew, sweetened with a touch of caramel and topped with a salted, rich cold foam.",
+    "price": 27500,
+    "imageUrl": "https://globalassets.starbucks.com/assets/64da774b521447f690c20290cd4cb29d.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 18
+  },
+  {
+    "name": "Nitro Cold Brew",
+    "description": "Our small-batch cold brew—slow-steeped for a super-smooth taste—gets even better. We're infusing it with nitrogen to create a sweet flavor without sugar and cascading, velvety crema. Perfection is served.",
+    "price": 32000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/8c5dcfa053504f85b3e7af2fa451346d.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 18
+  },
+  {
+    "name": "Iced Caffè Americano",
+    "description": "Espresso shots topped with cold water produce a light layer of crema, then served over ice. The result: a wonderfully rich cup with depth and nuance. Pro Tip: For an additional boost, ask your barista to try this with an extra shot.",
+    "price": 37000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/921a409e6f55407da52eee4c8ad13ada.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 19
+  },
+  {
+    "name": "Iced Coffee with Milk",
+    "description": "Freshly brewed Iced Coffee Blend with milk served chilled and sweetened over ice. An absolutely, seriously, refreshingly lift to any day.",
+    "price": 45000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/062aac2b949a40e188e832c868803b58.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 20
+  },
+  {
+    "name": "Iced Toasted Vanilla Oatmilk Shaken Espresso",
+    "description": "Espresso combined with notes of caramelized vanilla shaken together and topped with oatmilk for an energizing treat to boost your day.",
+    "price": 58000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/9a51e00fff1c42e8acb62fcbfcef8838.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 21
+  },
+  {
+    "name": "Iced Flat White",
+    "description": "Smooth ristretto shots of espresso get the perfect amount of whole milk and ice to create a not-too-strong, not-too-creamy, just-right flavor.",
+    "price": 53750,
+    "imageUrl": "https://globalassets.starbucks.com/assets/a1d7c679325f4c32ab5441f051aa0767.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 22
+  },
+  {
+    "name": "Iced Caffè Latte",
+    "description": "Our dark, rich espresso combined with milk and served over ice. A perfect milk-forward cooldown.",
+    "price": 45600,
+    "imageUrl": "https://globalassets.starbucks.com/assets/f4fd128c834643fa8c74f4ae9f579013.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 23
+  },
+  {
+    "name": "Iced Caramel Macchiato",
+    "description": "We combine our rich, full-bodied espresso with vanilla-flavored syrup, milk and ice, then top it off with a caramel drizzle for an oh-so-sweet finish.",
+    "price": 39000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/363835b1db024636adeb4089ebb96291.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 24
+  },
+  {
+    "name": "Iced Caffè Mocha",
+    "description": "Our rich, full-bodied espresso combined with bittersweet mocha sauce, milk and ice, then topped with sweetened whipped cream. The classic iced coffee drink that always sweetly satisfies.",
+    "price": 51000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/0360378c6e774cc3a38d870fc75d5462.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 25
+  },
+  {
+    "name": "Iced Chai Tea Latte",
+    "description": "Black tea infused with cinnamon, clove, and other warming spices are combined with milk and ice for the perfect balance of sweet and spicy.",
+    "price": 27500,
+    "imageUrl": "https://globalassets.starbucks.com/assets/98c8bafe1e2241f3ad02212eca2376e3.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 26
+  },
+  {
+    "name": "Iced Black Tea",
+    "description": "Premium black tea is shaken with ice. It's the ideal iced tea—a rich and flavorful black tea journey awaits you.",
+    "price": 45000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/f56f2f6798504d72812581fbd3c326b8.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 27
+  },
+  {
+    "name": "Iced Matcha Tea Latte",
+    "description": "Smooth and creamy matcha sweetened just right and served with milk over ice. Green has never tasted so good.",
+    "price": 37000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/08f75b01cd3c46af9d8665c5912341e7.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 28
+  },
+  {
+    "name": "Iced Passion Tea",
+    "description": "A blend of hibiscus, lemongrass and apple, handshaken with ice. A refreshingly vibrant tea infused with the color of passion.",
+    "price": 47000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/8b91a3ac49114445b4b6f2acf58a03ec.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 29
+  },
+  {
+    "name": "Blended Strawberry Lemonade",
+    "description": "Awaken your taste buds with the zing of refreshing lemonade infused with a hint of delicious strawberry flavor and blended with ice. A light, fresh beverage that puts a little zip in your step.",
+    "price": 22000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/381ddaee19154b759eeea816c1890aec.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 30
+  },
+  {
+    "name": "Milk",
+    "description": "Skim, 2%, soy, almond, or coconutmilk served chilled or over ice. Simply refreshing.",
+    "price": 22000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/22957ce7f042474892b8fe1e75d76ebe.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 31
+  },
+  {
+    "name": "Iced Brown Sugar Oatmilk Shaken Espresso",
+    "description": "First we shake espresso, brown sugar and cinnamon together, and then top it off with oatmilk and ice for a cool lift to power you through your day.",
+    "price": 48000,
+    "imageUrl": "https://globalassets.starbucks.com/assets/5bfe4972905a400c97717ce4176ebe92.jpg?impolicy=1by1_wide_topcrop_630",
+    "CategoryId": 21
+  }
+]
