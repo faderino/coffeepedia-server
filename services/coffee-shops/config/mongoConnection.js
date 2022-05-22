@@ -1,6 +1,6 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-let uri = process.env.MONGO_DB_URI
+let uri = ''
 
 if (process.env.NODE_ENV === 'production') {
   uri = process.env.MONGO_DB_URI
