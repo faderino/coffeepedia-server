@@ -12,6 +12,11 @@ const typeDefs = gql`
         tag : [String]
         createdAt : Date
     }
+    
+    type Category{
+        id:ID
+        name: String
+    }
 
     type Item{
         id: ID
@@ -126,6 +131,7 @@ const typeDefs = gql`
         getCoffeeShopById(
             place_id: String
         ): CoffeeShop
+        getAllCategory: [Category]
     }
 
     type Mutation{
