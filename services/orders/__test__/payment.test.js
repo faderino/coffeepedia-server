@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../app");
 const { createToken } = require("../helpers/jwt");
+const { getCurrentTimestamp } = require("../helpers/Midtrans");
 const { Order, Category, User, Item } = require("../models/index");
 
 let accesstoken;
@@ -67,7 +68,11 @@ describe("Payment Test Test", () => {
     const res = await request(app)
       .post("/payments")
       .set("accesstoken", accesstoken)
-      .send({ email: "admin@gmail.com", totalPrice: 100000 })
+      .send({
+        email: "admin@gmail.com",
+        totalPrice: 100000,
+        OrderId: getCurrentTimestamp(),
+      })
       .expect(200);
     console.log(res.body);
     expect(res.body).toEqual(expect.any(Object));
