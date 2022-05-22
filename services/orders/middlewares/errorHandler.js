@@ -42,14 +42,16 @@ function errorHandler(error, req, res, next) {
     res.status(400).json({
       message: arrError,
     });
-  } else if (error.name === "SequelizeUniqueConstraintError") {
-    error.errors.forEach((el) => {
-      arrError.push(el.message);
-    });
-    res.status(400).json({
-      message: arrError,
-    });
-  } else if (error.message === "DUPLICATE ORDER") {
+  }
+  // else if (error.name === "SequelizeUniqueConstraintError") {
+  //   error.errors.forEach((el) => {
+  //     arrError.push(el.message);
+  //   });
+  //   res.status(400).json({
+  //     message: arrError,
+  //   });
+  // }
+  else if (error.message === "DUPLICATE ORDER") {
     res.status(400).json({
       message: `Item sudah ada dikerjanjang. perbaharui isi keranjang?`,
       isOrdered: "true",
