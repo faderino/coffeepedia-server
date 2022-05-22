@@ -45,6 +45,57 @@ const typeDefs = gql`
         OrderDetails: [OrderDetail]
         errorText : String
     }
+    
+    type Photos{
+        height: Int
+        html_attributions: [String]
+        photo_reference: String
+        width: Int
+    }
+
+    type Location{
+        lat: String
+        lng: String
+    }
+
+    type Northeast{
+        lat: String
+        lng: String
+    }
+
+    type Southwest{
+        lat: String
+        lng: String
+    }
+
+    type ViewPort{
+        northeast: Northeast
+        southwest: Southwest
+    }
+
+    type Geometry{
+        location: Location
+        viewport: ViewPort
+    }
+
+    type Opening_hours{
+        open_now : Boolean
+    }
+
+    type Maps{
+        place_id: String
+        name : String
+        vicinity: String
+        photos : [Photos]
+        geometry: Geometry
+        rating: Float
+        user_ratings_total: Int
+        icon: String
+        icon_background_color: String
+        icon_mask_base_uri: String
+        opening_hours: Opening_hours
+
+    }
 
     type Response{
         message : [String]
@@ -57,6 +108,10 @@ const typeDefs = gql`
         getItemById(id:ID) : Item
         getAllOrder: [Order]
         getOrderById(id:ID): Order
+        getMaps(
+            latitude: String
+            longitude: String
+            ) : [Maps]
     }
 
     type Mutation{

@@ -11,6 +11,7 @@ const redis = require("./config/connection");
 const axios = require("axios");
 
 const urlArticle = 'http://localhost:4001'
+const urlMaps = 'http://localhost:4002'
 const urlOrder = 'http://localhost:4003'
 
 const dateScalar = new GraphQLScalarType({
@@ -198,6 +199,19 @@ const resolvers = {
             } catch (error) {
                 return { errorText: error.response.data.message }
             }
+        },
+        // ! MAPS
+        getMaps: async (_, args) => {
+            console.log(args);
+            try {
+                const { data } = await axios({
+                    url: `${urlMaps}/maps/nearbySearch?latitude=${args.latitude}&longitude=${args.longitude}`,
+                    method: "GET"
+                })
+                return data
+            } catch (error) {
+                return error
+            }
         }
     },
     Mutation: {
@@ -311,7 +325,7 @@ const resolvers = {
             } catch (error) {
                 return { message: [error.response.data.message] }
             }
-        }
+        },
     }
 
 }
