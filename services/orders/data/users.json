@@ -1,0 +1,18 @@
+[
+  {
+    "email": "coffee@coffeepedia.com",
+    "password": "coffee",
+    "username": "coffee",
+    "phoneNumber": "0808080878",
+    "address": "Bandung",
+    "balance": 0
+  },
+  {
+    "email": "pedia@coffeepedia.com",
+    "password": "pedia",
+    "username": "pedia",
+    "phoneNumber": "0808080879",
+    "address": "Bandung",
+    "balance": 0
+  }
+]
