@@ -46,7 +46,6 @@ const resolvers = {
           })
           articles = data
           redis.set('articles', JSON.stringify(data))
-          console.log(data);
           return articles
         } else {
           return articles
