@@ -47,7 +47,7 @@ describe("User Test", () => {
     expect(res.body.id).toBe(1);
     expect(res.body.username).toBe("admin");
     expect(res.body.balance).toBe(0);
-    expect(res.body.accessToken).toEqual(expect.any(String));
+    expect(res.body.accesstoken).toEqual(expect.any(String));
   });
 
   it("should return error when invalid email", async () => {

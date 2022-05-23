@@ -1,227 +1,208 @@
 const { gql } = require("apollo-server");
 
 const typeDefs = gql`
-    scalar Date
+  scalar Date
 
-    type Article {
-        _id : ID
-        title : String
-        content : String
-        imageUrl : String
-        author: String
-        tag : [String]
-        createdAt : Date
-    }
-    
-    type Category{
-        id:ID
-        name: String
-    }
+  type Article {
+    _id: ID
+    title: String
+    content: String
+    imageUrl: String
+    author: String
+    tag: [String]
+    createdAt: Date
+  }
 
-    type Item{
-        id: ID
-        CategoryId: Int
-        name: String
-        price: Int
-        description : String
-        imageUrl : String
-        errorText : String
-    }
+  type Category {
+    id: ID
+    name: String
+  }
 
-    type OrderDetail{
-        id: ID
-        ItemId: Int
-        OrderId : Int
-        name : String
-        price : Int 
-        quantity : Int 
-        imageUrl : String 
-        createdAt : Date
-        updatedAt : Date
-    }
+  type User {
+    id: ID
+    email: String
+    password: String
+    username: String
+    phoneNumber: String
+    address: String
+    balance: Int
+    accesstoken: String
+  }
 
-    type Order{
-        id: ID
-        UserId: Int
-        CoffeeShopId: String
-        status: String
-        createdAt: Date
-        updatedAt: Date
-        OrderDetails: [OrderDetail]
-        errorText : String
-    }
-    
-    type Photos{
-        height: Int
-        html_attributions: [String]
-        photo_reference: String
-        width: Int
-    }
+  type Item {
+    id: ID
+    CategoryId: Int
+    name: String
+    price: Int
+    description: String
+    imageUrl: String
+    errorText: String
+  }
 
-    type Location{
-        lat: String
-        lng: String
-    }
+  type OrderDetail {
+    id: ID
+    ItemId: Int
+    OrderId: Int
+    name: String
+    price: Int
+    quantity: Int
+    imageUrl: String
+    createdAt: Date
+    updatedAt: Date
+  }
 
-    type Northeast{
-        lat: String
-        lng: String
-    }
+  type Order {
+    id: ID
+    UserId: Int
+    CoffeeShopId: String
+    status: String
+    createdAt: Date
+    updatedAt: Date
+    OrderDetails: [OrderDetail]
+    errorText: String
+  }
 
-    type Southwest{
-        lat: String
-        lng: String
-    }
+  type Photos {
+    height: Int
+    html_attributions: [String]
+    photo_reference: String
+    width: Int
+  }
 
-    type ViewPort{
-        northeast: Northeast
-        southwest: Southwest
-    }
+  type Location {
+    lat: String
+    lng: String
+  }
 
-    type Geometry{
-        location: Location
-        viewport: ViewPort
-    }
+  type Northeast {
+    lat: String
+    lng: String
+  }
 
-    type Opening_hours{
-        open_now : Boolean
-    }
+  type Southwest {
+    lat: String
+    lng: String
+  }
 
-    type Maps{
-        place_id: String
-        name : String
-        vicinity: String
-        photos : [Photos]
-        geometry: Geometry
-        rating: Float
-        user_ratings_total: Int
-        icon: String
-        icon_background_color: String
-        icon_mask_base_uri: String
-        opening_hours: Opening_hours
-    }
+  type ViewPort {
+    northeast: Northeast
+    southwest: Southwest
+  }
 
-    type CoffeeShop{
-        _id: String
-        place_id : String
-        name: String
-    }
+  type Geometry {
+    location: Location
+    viewport: ViewPort
+  }
 
-    type Response{
-        message : [String]
-    }
+  type Opening_hours {
+    open_now: Boolean
+  }
 
-    type LoginResponse{
-        id: ID
-        username: String
-        balance: Int
-        accessToken: String
-    }
+  type Maps {
+    place_id: String
+    name: String
+    vicinity: String
+    photos: [Photos]
+    geometry: Geometry
+    rating: Float
+    user_ratings_total: Int
+    icon: String
+    icon_background_color: String
+    icon_mask_base_uri: String
+    opening_hours: Opening_hours
+  }
 
-    type PaymentResponse{
-        token: String
-        redirect_url : String
-    }
+  type CoffeeShop {
+    _id: String
+    place_id: String
+    name: String
+  }
 
-    type Query{
-        getAllArticle : [Article]
-        getArticleById(_id:ID): Article
-        getAllItem : [Item]
-        getItemById(id:ID) : Item
-        getAllOrder(accesstoken: String): [Order]
-        getOrderById(
-            accesstoken: String!
-            id:ID
-            ): Order
-        getMaps(
-            latitude: String
-            longitude: String
-            ) : [Maps]
-        getAllCoffeeShop: [CoffeeShop]
-        getCoffeeShopById(
-            place_id: String
-        ): CoffeeShop
-        getAllCategory: [Category]
-    }
+  type Response {
+    message: [String]
+    User: User
+    Order: Order
+  }
+  type LoginResponse {
+    id: ID
+    username: String
+    balance: Int
+    accessToken: String
+  }
 
-    type Mutation{
+  type PaymentResponse {
+    token: String
+    redirect_url: String
+  }
 
-        RegisterUser(
-            username : String
-            email : String
-            password : String
-            phoneNumber: String
-            address : String
-        ): Response
+  type Query {
+    getAllArticle: [Article]
+    getArticleById(_id: ID): Article
+    getAllItem: [Item]
+    getItemById(id: ID): Item
+    getAllOrder(accesstoken: String): [Order]
+    getOrderById(accesstoken: String!, id: ID): Order
+    getMaps(latitude: String, longitude: String): [Maps]
+    getAllCoffeeShop: [CoffeeShop]
+    getCoffeeShopById(place_id: String): CoffeeShop
+    getAllCategory: [Category]
+  }
 
-        LoginUser(
-            email : String
-            password : String
-        ) : LoginResponse
+  type Mutation {
+    RegisterUser(
+      username: String
+      email: String
+      password: String
+      phoneNumber: String
+      address: String
+    ): Response
 
-        AddOrder(
-            id: String
-            accesstoken: String
-        ): Response
+    LoginUser(email: String, password: String): LoginResponse
 
-        DeleteOrder(
-            id : ID
-            accesstoken: String
-            ): Response
+    AddOrder(id: String, accesstoken: String): Response
 
-        UpdateOrder(
-            id : ID
-            accesstoken: String
-            status : String
-            ): Response
+    DeleteOrder(id: ID, accesstoken: String): Response
 
-        AddOrderDetail(
-            accesstoken: String
-            id: ID
-            quantity: Int
-            OrderId: Int
-            name: String
-            price: Int
-            imageUrl: String
-        ): Response
+    UpdateOrder(id: ID, accesstoken: String, status: String): Response
 
-        DeleteOrderDetail(
-            accesstoken: String
-            id:ID
-            ): Response
+    AddOrderDetail(
+      accesstoken: String
+      id: ID
+      quantity: Int
+      OrderId: Int
+      name: String
+      price: Int
+      imageUrl: String
+    ): Response
 
-        UpdateOrderDetail(
-            accesstoken: String
-            id:ID
-            action: String
-            quantity: Int
-        ) : Response
-        
-        AddCoffeeShop(
-            place_id: String
-            name: String
-        ) : Response
+    DeleteOrderDetail(accesstoken: String, id: ID): Response
 
-        DeleteCoffeeShop(
-            place_id: String
-        ) : Response
+    UpdateOrderDetail(
+      accesstoken: String
+      id: ID
+      action: String
+      quantity: Int
+    ): Response
 
-        DoPayment(
-            accesstoken: String
-            email: String
-            totalPrice: Int 
-            OrderId: Int
-        ): PaymentResponse
+    AddCoffeeShop(place_id: String, name: String): Response
 
-        AddArticle(
-            title: String,
-            content: String,
-            imageUrl: String,
-            author: String,
-            tag: String,
-            createdAt: String
-        ): Response
-    }
-`
+    DoPayment(
+      accesstoken: String
+      email: String
+      totalPrice: Int
+      OrderId: Int
+    ): PaymentResponse
 
-module.exports = typeDefs
+    AddArticle(
+      title: String
+      content: String
+      imageUrl: String
+      author: String
+      tag: String
+      createdAt: String
+    ): Response
+    DeleteCoffeeShop(place_id: String): Response
+  }
+`;
+
+module.exports = typeDefs;
