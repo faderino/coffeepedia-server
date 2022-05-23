@@ -116,6 +116,7 @@ const typeDefs = gql`
   type Response {
     message: [String]
     User: User
+    Order: Order
   }
 
   type PaymentResponse {
@@ -170,9 +171,9 @@ const typeDefs = gql`
       accesstoken: String
     ): Response
 
-    AddCoffeeShop(place_id: String, name: String, accesstoken: String): Response
+    AddCoffeeShop(place_id: String, name: String): Response
 
-    DeleteCoffeeShop(place_id: String, accesstoken: String): Response
+    DeleteCoffeeShop(place_id: String): Response
 
     DoPayment(
       email: String
