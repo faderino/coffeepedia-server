@@ -307,14 +307,14 @@ const resolvers = {
     LoginUser: async (_, args) => {
       const { email, password } = args;
       try {
-        await axios({
+        const { data } = await axios({
           url: `${urlOrder}/login`,
           method: "POST",
           data: {
             email, password
           }
         })
-        return { message: ["Success Login"] }
+        return data
       } catch (error) {
         return { message: [error.response.data.message] }
       }
