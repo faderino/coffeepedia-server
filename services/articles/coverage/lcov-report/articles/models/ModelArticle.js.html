@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.78% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/19</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.78% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/19</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -122,33 +122,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,8 +156,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,34 +175,34 @@
 const { ObjectId } = require('mongodb');
 &nbsp;
 class Article {
-<span class="fstat-no" title="function not covered" >    st</span>atic article() {
-        const database = <span class="cstat-no" title="statement not covered" >getDB()</span>
-<span class="cstat-no" title="statement not covered" >        return database.collection('articles')</span>
+    static article() {
+        const database = getDB()
+        return database.collection('articles')
     }
-<span class="fstat-no" title="function not covered" >    st</span>atic async findAllArticle() {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const allArticle = <span class="cstat-no" title="statement not covered" >await this.article().find().toArray()</span>
-<span class="cstat-no" title="statement not covered" >            return allArticle</span>
+    static async findAllArticle() {
+        try {
+            const allArticle = await this.article().find().toArray()
+            return allArticle
         } catch (error) {
 <span class="cstat-no" title="statement not covered" >            throw error</span>
         }
     }
-<span class="fstat-no" title="function not covered" >    st</span>atic async findArticleById(id) {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const selectedArticle = <span class="cstat-no" title="statement not covered" >await this.article().findOne({</span>
+    static async findArticleById(id) {
+        try {
+            const selectedArticle = await this.article().findOne({
                 _id: ObjectId(id)
             })
-<span class="cstat-no" title="statement not covered" >            if (selectedArticle) {</span>
-<span class="cstat-no" title="statement not covered" >                return selectedArticle</span>
+            if (selectedArticle) {
+                return selectedArticle
             } else {
-<span class="cstat-no" title="statement not covered" >                throw {name: 'Data not found'}</span>
+                throw {name: 'Data not found'}
             }
         } catch (error) {
-<span class="cstat-no" title="statement not covered" >            throw error</span>
+            throw error
         }
     }
-<span class="fstat-no" title="function not covered" >    st</span>atic async addArticle(data) {
-<span class="cstat-no" title="statement not covered" >        try {</span>
+    static async addArticle(data) {
+        try {
             const {
                 title,
                 content,
@@ -210,8 +210,8 @@ class Article {
                 author,
                 tag,
                 createdAt
-            } = <span class="cstat-no" title="statement not covered" >data</span>
-<span class="cstat-no" title="statement not covered" >            await this.article().insertOne({</span>
+            } = data
+            await this.article().insertOne({
                 title,
                 content,
                 imageUrl,
@@ -232,7 +232,7 @@ module.exports = Article</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon May 23 2022 18:34:57 GMT+0700 (Indochina Time)
+                at Mon May 23 2022 21:58:24 GMT+0700 (Indochina Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

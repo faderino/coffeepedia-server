@@ -4,12 +4,14 @@ const { connection, client } = require('../config/connection.js');
 const Article = require('../models/ModelArticle')
 
 beforeAll(async () => {
+    process.env.NODE_ENV = 'test'
     await connection()
     jest.restoreAllMocks()
 });
 
 afterAll(() => {
     client.close()
+    process.env.NODE_ENV = 'development'
 })
 
 const articleInput = {
@@ -38,11 +40,17 @@ describe('Article - Success Test', () => {
 
 describe('Article - Success Test', () => {
     it('Get article by id - Object of Article', async () => {
-        const res = await request(app).get('/article/628669315e4e2676c775f7db')
+        const res = await request(app).get('/article/6289ec9c4af4cae573253f5b')
         expect(res.status).toBe(200)
-        const expected = ['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']
-        expect(res.status).toBe(200)
-        expect(['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']).toEqual(expect.arrayContaining(expected))
+        expect(typeof res.body).toBe('object')
+        expect(res.body).toHaveProperty("_id", '6289ec9c4af4cae573253f5b')
+        expect(res.body).toHaveProperty("title", 'JEDA DI TEKODEKO KOFFIEHUIS SEMARANG')
+        expect(res.body).toHaveProperty("content", expect.any(String))
+        expect(res.body).toHaveProperty("imageUrl", expect.any(String))
+        expect(res.body).toHaveProperty("author", expect.any(String))
+        expect(res.body).toHaveProperty("createdAt", expect.any(String))
+        expect(res.body).toHaveProperty("tag", expect.any(Object))
+        expect(Array.isArray(res.body.tag)).toBeTruthy()
     })
 })
 

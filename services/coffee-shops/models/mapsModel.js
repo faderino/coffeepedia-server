@@ -5,7 +5,7 @@ class Model {
   static async nearbySearch(location) {
     try {
       const { latitude, longitude } = location
-      const radius = 5000
+      const radius = 500
       const type = 'cafe'
       const keyword = 'coffee shop'
       const response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2C${longitude}&radius=${radius}&type=${type}&keyword=${keyword}&key=${apiKey}`)
