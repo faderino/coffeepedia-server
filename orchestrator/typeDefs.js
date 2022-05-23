@@ -218,7 +218,7 @@ const typeDefs = gql`
             content: String,
             imageUrl: String,
             author: String,
-            tag: [String],
+            tag: String,
             createdAt: String
         ): Response
     }
