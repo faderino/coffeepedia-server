@@ -12,6 +12,11 @@ const typeDefs = gql`
         tag : [String]
         createdAt : Date
     }
+    
+    type Category{
+        id:ID
+        name: String
+    }
 
     type Item{
         id: ID
@@ -106,6 +111,13 @@ const typeDefs = gql`
         message : [String]
     }
 
+    type LoginResponse{
+        id: ID
+        username: String
+        balance: Int
+        accessToken: String
+    }
+
     type PaymentResponse{
         token: String
         redirect_url : String
@@ -116,8 +128,11 @@ const typeDefs = gql`
         getArticleById(_id:ID): Article
         getAllItem : [Item]
         getItemById(id:ID) : Item
-        getAllOrder: [Order]
-        getOrderById(id:ID): Order
+        getAllOrder(accesstoken: String): [Order]
+        getOrderById(
+            accesstoken: String!
+            id:ID
+            ): Order
         getMaps(
             latitude: String
             longitude: String
@@ -126,6 +141,7 @@ const typeDefs = gql`
         getCoffeeShopById(
             place_id: String
         ): CoffeeShop
+        getAllCategory: [Category]
     }
 
     type Mutation{
@@ -141,19 +157,26 @@ const typeDefs = gql`
         LoginUser(
             email : String
             password : String
-        ) : Response
+        ) : LoginResponse
 
         AddOrder(
             id: String
+            accesstoken: String
         ): Response
 
-        DeleteOrder(id : ID): Response
+        DeleteOrder(
+            id : ID
+            accesstoken: String
+            ): Response
+
         UpdateOrder(
             id : ID
+            accesstoken: String
             status : String
             ): Response
 
         AddOrderDetail(
+            accesstoken: String
             id: ID
             quantity: Int
             OrderId: Int
@@ -162,9 +185,13 @@ const typeDefs = gql`
             imageUrl: String
         ): Response
 
-        DeleteOrderDetail(id:ID): Response
+        DeleteOrderDetail(
+            accesstoken: String
+            id:ID
+            ): Response
 
         UpdateOrderDetail(
+            accesstoken: String
             id:ID
             action: String
             quantity: Int
@@ -180,6 +207,7 @@ const typeDefs = gql`
         ) : Response
 
         DoPayment(
+            accesstoken: String
             email: String
             totalPrice: Int 
             OrderId: Int
@@ -190,7 +218,7 @@ const typeDefs = gql`
             content: String,
             imageUrl: String,
             author: String,
-            tag: String,
+            tag: [String],
             createdAt: String
         ): Response
     }

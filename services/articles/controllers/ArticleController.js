@@ -16,6 +16,7 @@ class ArticleController {
             const response = await Article.findArticleById(id)
             res.status(200).json(response)
         } catch (error) {
+            console.log(error.message);
             next(error)
         }
     }

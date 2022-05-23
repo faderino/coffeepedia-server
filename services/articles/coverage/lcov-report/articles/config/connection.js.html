@@ -109,8 +109,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const { MongoClient } = require('mongodb');
 &nbsp;
-const uri = process.env.URI_MONGO
-&nbsp;
+let uri = process.env.URI_MONGO
+<span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.NODE_ENV === 'production') {
+<span class="cstat-no" title="statement not covered" >    uri = process.env.URI_MONGO</span>
+} else {
+    uri = 'mongodb://127.0.0.1:27017/?directConnection=true&amp;serverSelectionTimeoutMS=2000&amp;appName=mongosh+1.4.1'
+}
 const client = new MongoClient(uri);
 &nbsp;
 let db;

@@ -153,6 +153,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,6 +176,7 @@ class ArticleController {
             const response = await Article.findArticleById(id)
             res.status(200).json(response)
         } catch (error) {
+            console.log(error.message);
             next(error)
         }
     }

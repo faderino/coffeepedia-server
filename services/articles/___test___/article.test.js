@@ -41,7 +41,17 @@ describe('Article - Success Test', () => {
         const res = await request(app).get('/article/6289ec9c4af4cae573253f5b')
         expect(res.status).toBe(200)
         const expected = ['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']
+        expect(res.status).toBe(200)
         expect(['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']).toEqual(expect.arrayContaining(expected))
+    })
+})
+
+describe('Article - Fail Test', () => {
+    it('Get all article - data not found', async () => {
+        const res = await request(app).get('/articles')
+        expect(res.status).toBe(200)
+        expect(typeof res.body).toBe("object");
+        expect([]).toHaveLength(0)
     })
 })
 
