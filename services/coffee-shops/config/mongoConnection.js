@@ -1,31 +1,35 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
-let uri = ''
+let uri = "";
 
-if (process.env.NODE_ENV === 'production') {
-  uri = process.env.MONGO_DB_URI
+if (process.env.NODE_ENV === "production") {
+  uri = process.env.MONGO_DB_URI;
 } else {
-  uri = 'mongodb://localhost:27017'
+  uri = process.env.MONGO_DB_URI;
 }
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
 
-let db
+let db;
 async function connection() {
   try {
-    await client.connect()
+    await client.connect();
     db = client.db("coffeepedia");
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
 
 function getDb() {
-  return db
+  return db;
 }
 
 module.exports = {
   connection,
   getDb,
-  client
-}
+  client,
+};
