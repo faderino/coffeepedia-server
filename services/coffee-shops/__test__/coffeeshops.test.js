@@ -1,14 +1,15 @@
-
 const request = require("supertest");
 
 const app = require("../app");
 const { connection, client } = require("../config/mongoConnection");
 
 beforeAll(async () => {
+  process.env.NODE_ENV = 'test'
   await connection();
 });
 
 afterAll(() => {
+  process.env.NODE_ENV = 'development'
   client.close()
 })
 
