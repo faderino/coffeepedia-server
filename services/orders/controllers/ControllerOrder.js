@@ -20,6 +20,7 @@ class ControllerOrder {
         { transaction: t }
       );
 
+      console.log(response);
       let send = {
         message: "Cart Found",
         response,
@@ -42,9 +43,6 @@ class ControllerOrder {
           };
         }
       }
-
-      delete response.dataValues.createdAt;
-      delete response.dataValues.updatedAt;
 
       await t.commit();
 

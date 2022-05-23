@@ -24,4 +24,13 @@ describe("Category Test", () => {
     expect(res.body[0].id).toEqual(expect.any(Number));
     expect(res.body[0].name).toEqual(expect.any(String));
   });
+
+  it("should return all Categories", async () => {
+    const res = await request(app).get("/categories").expect(200);
+
+    expect(res.body).toEqual(expect.any(Array));
+    expect(res.body[0]).toEqual(expect.any(Object));
+    expect(res.body[0].id).toEqual(expect.any(Number));
+    expect(res.body[0].name).toEqual(expect.any(String));
+  });
 });

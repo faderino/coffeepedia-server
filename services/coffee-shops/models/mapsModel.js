@@ -36,6 +36,35 @@ class Model {
       throw err;
     }
   }
+
+  static async placeDetail(place_id) {
+    try {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${apiKey}`
+      );
+      if (response.data.status === "OK") {
+        const photos = response.data.result.photos.map((photo) => {
+          return `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photo.photo_reference}&maxwidth=620&key=`;
+        });
+        const data = response.data.result;
+        return {
+          place_id: data.place_id,
+          name: data.name,
+          rating: data.rating,
+          user_ratings_total: data.user_ratings_total,
+          opening_hours: data.opening_hours,
+          price_level: data.price_level,
+          vicinity: data.vicinity,
+          photos,
+        };
+      } else {
+        throw { name: "internal server error" };
+      }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
 }
 
 module.exports = Model;

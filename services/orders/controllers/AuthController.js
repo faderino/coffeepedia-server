@@ -43,7 +43,7 @@ class AuthController {
         id: emailTrue.id,
         username: emailTrue.username,
         balance: emailTrue.balance,
-        accessToken: jwtToken,
+        accesstoken: jwtToken,
       });
     } catch (error) {
       next(error);
