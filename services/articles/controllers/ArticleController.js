@@ -4,9 +4,6 @@ class ArticleController {
     static async findAllArticle(req, res, next) {
         try {
             const response = await Article.findAllArticle()
-            if (!response) {
-                throw { name: "Data not found" }
-            }
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -17,9 +14,6 @@ class ArticleController {
         try {
             const { id } = req.params
             const response = await Article.findArticleById(id)
-            if (!response) {
-                throw { name: "Data not found" }
-            }
             res.status(200).json(response)
         } catch (error) {
             console.log(error.message);
@@ -29,7 +23,6 @@ class ArticleController {
 
     static async addArticle(req, res, next) {
         try {
-            console.log()
             const {
                 title,
                 content,

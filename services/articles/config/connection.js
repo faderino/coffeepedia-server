@@ -22,4 +22,4 @@ function getDB() {
     return db
 }
 
-module.exports = { connection, getDB }
+module.exports = { connection, getDB, client }

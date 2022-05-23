@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon bin/www",
-    "test": "jest --runInBand --detectOpenHandles --forceExit --coverage"
+    "test": "jest --runInBand --forceExit --coverage"
   },
   "keywords": [],
   "author": "",
