@@ -32,7 +32,7 @@ afterAll(async () => {
   });
 }, 30000);
 
-describe("Item Test", () => {
+describe("Auth Test", () => {
   it("should return invalid accesstoken error", async () => {
     const res = await request(app).get("/orders").expect(401);
 
