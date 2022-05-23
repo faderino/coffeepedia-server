@@ -140,12 +140,16 @@ const resolvers = {
     // ! ORDER
     getAllOrder: async (_, args) => {
       try {
+        const { accesstoken } = args;
         const orderCache = await redis.get("orders");
         let orders = JSON.parse(orderCache);
         if (!orderCache) {
           const { data } = await axios({
             url: `${urlOrder}/orders`,
             method: "GET",
+            headers: {
+              accesstoken,
+            },
           });
           orders = data;
           redis.set("orders", JSON.stringify(data));
@@ -154,6 +158,9 @@ const resolvers = {
           const { data } = await axios({
             url: `${urlOrder}/orders`,
             method: "GET",
+            headers: {
+              accesstoken,
+            },
           });
           if (data.length === orders.length) {
             console.log("data sama");
@@ -172,6 +179,7 @@ const resolvers = {
     },
     getOrderById: async (_, args) => {
       try {
+        const { accesstoken } = args;
         const orderCache = await redis.get("order");
         let order = JSON.parse(orderCache);
         if (orderCache) {
@@ -182,6 +190,9 @@ const resolvers = {
             const { data } = await axios({
               url: `${urlOrder}/orders/${args.id}`,
               method: "GET",
+              headers: {
+                accesstoken,
+              },
             });
             order = data;
             redis.set("order", JSON.stringify(data));
@@ -191,6 +202,9 @@ const resolvers = {
           const { data } = await axios({
             url: `${urlOrder}/orders/${args.id}`,
             method: "GET",
+            headers: {
+              accesstoken,
+            },
           });
           order = data;
           redis.set("order", JSON.stringify(data));
@@ -309,6 +323,8 @@ const resolvers = {
     // ! ORDER
     AddOrder: async (_, args) => {
       try {
+        console.log(args);
+        const { accesstoken } = args;
         const { data } = await axios({
           url: `${urlOrder}/orders/${args.id}`,
           method: "POST",
@@ -317,13 +333,14 @@ const resolvers = {
           },
         });
         redis.del("order");
-        return { message: [data.message] };
+        return { message: [data.message], Order: data.response };
       } catch (error) {
         return { message: [error.response.data.message] };
       }
     },
     DeleteOrder: async (_, args) => {
       try {
+        const { accesstoken } = args;
         const { data } = await axios({
           url: `${urlOrder}/orders/${args.id}`,
           method: "DELETE",
@@ -357,7 +374,8 @@ const resolvers = {
     },
     // ! ORDER DETAIL
     AddOrderDetail: async (_, args) => {
-      const { id, quantity, OrderId, name, price, imageUrl } = args;
+      const { id, quantity, OrderId, name, price, imageUrl, accesstoken } =
+        args;
       try {
         const { data } = await axios({
           url: `${urlOrder}/orderDetails/${args.id}`,
@@ -383,6 +401,7 @@ const resolvers = {
     },
     DeleteOrderDetail: async (_, args) => {
       try {
+        const { accesstoken } = args;
         const { data } = await axios({
           url: `${urlOrder}/orderDetails/${args.id}`,
           method: "DELETE",
@@ -396,7 +415,7 @@ const resolvers = {
       }
     },
     UpdateOrderDetail: async (_, args) => {
-      const { id, action, quantity } = args;
+      const { id, action, quantity, accesstoken } = args;
       try {
         const { data } = await axios({
           url: `${urlOrder}/orderDetails/${id}`,
@@ -422,9 +441,6 @@ const resolvers = {
             place_id,
             name,
           },
-          headers: {
-            accesstoken,
-          },
         });
         redis.del("coffeeShops");
         return { message: [data.message] };
@@ -437,9 +453,6 @@ const resolvers = {
         const { data } = await axios({
           url: `${urlCoffeeShop}/coffeeshops/delete/${args.place_id}`,
           method: "DELETE",
-          headers: {
-            accesstoken,
-          },
         });
         redis.del("coffeeShops");
         return { message: [data.message] };
