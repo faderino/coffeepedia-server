@@ -11,7 +11,7 @@ class Article {
             const allArticle = await this.article().find().toArray()
             return allArticle
         } catch (error) {
-            console.log(error)
+            throw error
         }
     }
     static async findArticleById(id) {
@@ -19,9 +19,13 @@ class Article {
             const selectedArticle = await this.article().findOne({
                 _id: ObjectId(id)
             })
-            return selectedArticle
+            if (selectedArticle) {
+                return selectedArticle
+            } else {
+                throw {name: 'Data not found'}
+            }
         } catch (error) {
-            console.log(error)
+            throw error
         }
     }
     static async addArticle(data) {
@@ -34,7 +38,7 @@ class Article {
                 tag,
                 createdAt
             } = data
-            const response = await this.article().insertOne({
+            await this.article().insertOne({
                 title,
                 content,
                 imageUrl,
