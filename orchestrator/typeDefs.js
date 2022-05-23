@@ -128,8 +128,11 @@ const typeDefs = gql`
         getArticleById(_id:ID): Article
         getAllItem : [Item]
         getItemById(id:ID) : Item
-        getAllOrder: [Order]
-        getOrderById(id:ID): Order
+        getAllOrder(accesstoken: String): [Order]
+        getOrderById(
+            accesstoken: String!
+            id:ID
+            ): Order
         getMaps(
             latitude: String
             longitude: String
@@ -158,15 +161,22 @@ const typeDefs = gql`
 
         AddOrder(
             id: String
+            accesstoken: String
         ): Response
 
-        DeleteOrder(id : ID): Response
+        DeleteOrder(
+            id : ID
+            accesstoken: String
+            ): Response
+
         UpdateOrder(
             id : ID
+            accesstoken: String
             status : String
             ): Response
 
         AddOrderDetail(
+            accesstoken: String
             id: ID
             quantity: Int
             OrderId: Int
@@ -175,9 +185,13 @@ const typeDefs = gql`
             imageUrl: String
         ): Response
 
-        DeleteOrderDetail(id:ID): Response
+        DeleteOrderDetail(
+            accesstoken: String
+            id:ID
+            ): Response
 
         UpdateOrderDetail(
+            accesstoken: String
             id:ID
             action: String
             quantity: Int
@@ -193,6 +207,7 @@ const typeDefs = gql`
         ) : Response
 
         DoPayment(
+            accesstoken: String
             email: String
             totalPrice: Int 
             OrderId: Int
