@@ -7,10 +7,15 @@ const typeDefs = gql`
     _id: ID
     title: String
     content: String
-    imageUrl: [String]
+    imageUrl: String
     author: String
     tag: [String]
     createdAt: Date
+  }
+
+  type Category {
+    id: ID
+    name: String
   }
 
   type User {
@@ -118,6 +123,12 @@ const typeDefs = gql`
     User: User
     Order: Order
   }
+  type LoginResponse {
+    id: ID
+    username: String
+    balance: Int
+    accessToken: String
+  }
 
   type PaymentResponse {
     token: String
@@ -130,10 +141,11 @@ const typeDefs = gql`
     getAllItem: [Item]
     getItemById(id: ID): Item
     getAllOrder(accesstoken: String): [Order]
-    getOrderById(id: ID, accesstoken: String): Order
+    getOrderById(accesstoken: String!, id: ID): Order
     getMaps(latitude: String, longitude: String): [Maps]
     getAllCoffeeShop: [CoffeeShop]
     getCoffeeShopById(place_id: String): CoffeeShop
+    getAllCategory: [Category]
   }
 
   type Mutation {
@@ -145,42 +157,51 @@ const typeDefs = gql`
       address: String
     ): Response
 
-    LoginUser(email: String, password: String): Response
+    LoginUser(email: String, password: String): LoginResponse
 
     AddOrder(id: String, accesstoken: String): Response
 
     DeleteOrder(id: ID, accesstoken: String): Response
-    UpdateOrder(id: ID, status: String, accesstoken: String): Response
+
+    UpdateOrder(id: ID, accesstoken: String, status: String): Response
 
     AddOrderDetail(
+      accesstoken: String
       id: ID
       quantity: Int
       OrderId: Int
       name: String
       price: Int
       imageUrl: String
-      accesstoken: String
     ): Response
 
-    DeleteOrderDetail(id: ID, accesstoken: String): Response
+    DeleteOrderDetail(accesstoken: String, id: ID): Response
 
     UpdateOrderDetail(
+      accesstoken: String
       id: ID
       action: String
       quantity: Int
-      accesstoken: String
     ): Response
 
     AddCoffeeShop(place_id: String, name: String): Response
 
-    DeleteCoffeeShop(place_id: String): Response
-
     DoPayment(
+      accesstoken: String
       email: String
       totalPrice: Int
       OrderId: Int
-      accesstoken: String
     ): PaymentResponse
+
+    AddArticle(
+      title: String
+      content: String
+      imageUrl: String
+      author: String
+      tag: String
+      createdAt: String
+    ): Response
+    DeleteCoffeeShop(place_id: String): Response
   }
 `;
 

@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "node bin/www",
-    "test": "jest --runInBand --detectOpenHandles --forceExit --coverage"
+    "dev": "nodemon bin/www",
+    "test": "jest --runInBand --forceExit --coverage"
   },
   "keywords": [],
   "author": "",
