@@ -145,7 +145,10 @@ const resolvers = {
         if (!orderCache) {
           const { data } = await axios({
             url: `${urlOrder}/orders`,
-            method: 'GET'
+            method: 'GET',
+            headers: {
+              accesstoken: args.accesstoken
+            }
           })
           orders = data
           redis.set('orders', JSON.stringify(data))
@@ -153,7 +156,10 @@ const resolvers = {
         } else {
           const { data } = await axios({
             url: `${urlOrder}/orders`,
-            method: 'GET'
+            method: 'GET',
+            headers: {
+              accesstoken: args.accesstoken
+            }
           })
           if (data.length === orders.length) {
             console.log('data sama');
@@ -166,7 +172,6 @@ const resolvers = {
           }
         }
       } catch (error) {
-        console.log(error);
         return error
       }
     },
@@ -181,7 +186,10 @@ const resolvers = {
             redis.del('order')
             const { data } = await axios({
               url: `${urlOrder}/orders/${args.id}`,
-              method: "GET"
+              method: "GET",
+              headers: {
+                accesstoken: args.accesstoken
+              }
             })
             order = data
             redis.set('order', JSON.stringify(data))
@@ -190,7 +198,10 @@ const resolvers = {
         } else {
           const { data } = await axios({
             url: `${urlOrder}/orders/${args.id}`,
-            method: "GET"
+            method: "GET",
+            headers: {
+              accesstoken: args.accesstoken
+            }
           })
           order = data
           redis.set('order', JSON.stringify(data))
@@ -325,6 +336,9 @@ const resolvers = {
         const { data } = await axios({
           url: `${urlOrder}/orders/${args.id}`,
           method: "POST",
+          headers: {
+            accesstoken: args.accesstoken
+          }
         })
         redis.del("order")
         return { message: [data.message] }
@@ -337,6 +351,9 @@ const resolvers = {
         const { data } = await axios({
           url: `${urlOrder}/orders/${args.id}`,
           method: "DELETE",
+          headers: {
+            accesstoken: args.accesstoken
+          }
         })
         redis.del("order")
         return { message: [data.message] }
@@ -351,7 +368,10 @@ const resolvers = {
         const { data } = await axios({
           url: `${urlOrder}/orders/${id}`,
           method: "PATCH",
-          data: { status }
+          data: { status },
+          headers: {
+            accesstoken: args.accesstoken
+          }
         })
         redis.del('order')
         return { message: [data.message] }
@@ -368,6 +388,9 @@ const resolvers = {
           method: "POST",
           data: {
             id, quantity, OrderId, name, price, imageUrl
+          },
+          headers: {
+            accesstoken: args.accesstoken
           }
         })
         return { message: [data.message] }
@@ -379,7 +402,10 @@ const resolvers = {
       try {
         const { data } = await axios({
           url: `${urlOrder}/orderDetails/${args.id}`,
-          method: "DELETE"
+          method: "DELETE",
+          headers: {
+            accesstoken: args.accesstoken
+          }
         })
         return { message: [data.message] }
       } catch (error) {
@@ -392,7 +418,10 @@ const resolvers = {
         const { data } = await axios({
           url: `${urlOrder}/orderDetails/${id}`,
           method: "PATCH",
-          data: { action, quantity }
+          data: { action, quantity },
+          headers: {
+            accesstoken: args.accesstoken
+          }
         })
         return { message: [data.message] }
       } catch (error) {
@@ -435,7 +464,10 @@ const resolvers = {
         const { data } = await axios({
           url: `${urlOrder}/payments`,
           method: 'POST',
-          data: { email, totalPrice, OrderId }
+          data: { email, totalPrice, OrderId },
+          headers: {
+            accesstoken: args.accesstoken
+          }
         })
         return data
       } catch (error) {
