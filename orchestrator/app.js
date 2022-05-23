@@ -156,7 +156,10 @@ const resolvers = {
         } else {
           const { data } = await axios({
             url: `${urlOrder}/orders`,
-            method: 'GET'
+            method: 'GET',
+            headers: {
+              accesstoken: args.accesstoken
+            }
           })
           if (data.length === orders.length) {
             console.log('data sama');
@@ -196,7 +199,10 @@ const resolvers = {
         } else {
           const { data } = await axios({
             url: `${urlOrder}/orders/${args.id}`,
-            method: "GET"
+            method: "GET",
+            headers: {
+              accesstoken: args.accesstoken
+            }
           })
           order = data
           redis.set('order', JSON.stringify(data))
