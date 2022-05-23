@@ -38,7 +38,7 @@ describe('Article - Success Test', () => {
 
 describe('Article - Success Test', () => {
     it('Get article by id - Object of Article', async () => {
-        const res = await request(app).get('/article/6289ec9c4af4cae573253f5b')
+        const res = await request(app).get('/article/628669315e4e2676c775f7db')
         expect(res.status).toBe(200)
         const expected = ['_id', 'title', 'content', 'imageUrl', 'author', 'tag', 'cretedAt']
         expect(res.status).toBe(200)
