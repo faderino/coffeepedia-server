@@ -111,6 +111,13 @@ const typeDefs = gql`
         message : [String]
     }
 
+    type LoginResponse{
+        id: ID
+        username: String
+        balance: Int
+        accessToken: String
+    }
+
     type PaymentResponse{
         token: String
         redirect_url : String
@@ -147,7 +154,7 @@ const typeDefs = gql`
         LoginUser(
             email : String
             password : String
-        ) : Response
+        ) : LoginResponse
 
         AddOrder(
             id: String
