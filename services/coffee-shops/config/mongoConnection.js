@@ -1,32 +1,31 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
-let uri = ''
+let uri = "";
 
-if(process.env.NODE_ENV !== 'test') {
-  uri = process.env.MONGO_DB_URI
+if (process.env.NODE_ENV !== "test") {
+  uri = process.env.MONGO_DB_URI;
 } else {
-  uri = 'mongodb://localhost:27017'
+  uri = process.env.MONGO_DB_URI;
 }
 
 const client = new MongoClient(uri);
 
-let db
+let db;
 async function connection() {
   try {
-    
-    await client.connect()
+    await client.connect();
     db = client.db("coffeepedia");
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
 
 function getDb() {
-  return db
+  return db;
 }
 
 module.exports = {
   connection,
   getDb,
-  client
-}
+  client,
+};

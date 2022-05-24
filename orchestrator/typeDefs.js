@@ -127,7 +127,7 @@ const typeDefs = gql`
     id: ID
     username: String
     balance: Int
-    accessToken: String
+    accesstoken: String
   }
 
   type PaymentResponse {

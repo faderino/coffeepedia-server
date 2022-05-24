@@ -1,27 +1,27 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
-let uri = ''
+let uri = "";
 
-if(process.env.NODE_ENV !== 'test') {
-    uri = process.env.URI_MONGO
+if (process.env.NODE_ENV !== "test") {
+  uri = process.env.URI_MONGO;
 } else {
-    uri = 'mongodb://localhost:27017'
+  uri = process.env.URI_MONGO;
 }
 
 const client = new MongoClient(uri);
 
 let db;
 async function connection() {
-    try {
-        await client.connect()
-        db = client.db('coffeepedia')
-    } catch (error) {
-        console.log(error, "!!! ERROR CONNECTION.JS_SERVER-USER-CONFIG !!!");
-    }
+  try {
+    await client.connect();
+    db = client.db("coffeepedia");
+  } catch (error) {
+    console.log(error, "!!! ERROR CONNECTION.JS_SERVER-USER-CONFIG !!!");
+  }
 }
 
 function getDB() {
-    return db
+  return db;
 }
 
-module.exports = { connection, getDB, client }
+module.exports = { connection, getDB, client };
