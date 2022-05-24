@@ -83,7 +83,7 @@ describe("Order Detail Test", () => {
     expect(response.OrderId).toBe(1);
     expect(response.ItemId).toBe(1);
     expect(response.name).toBe("Kopi");
-    expect(response.price).toBe("25000");
+    expect(response.price).toBe(25000);
     expect(response.quantity).toBe(1);
     expect(response.imageUrl).toBe("www.google.com");
   });
