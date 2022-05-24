@@ -61,7 +61,6 @@ class Model {
         throw { name: "internal server error" };
       }
     } catch (err) {
-      console.log(err);
       throw err;
     }
   }

@@ -38,7 +38,7 @@ class Coffeeshop {
         place_id,
       });
       if (!response) {
-        throw {name: 'not found', statusCode: 404} 
+        throw { name: "not found", statusCode: 404 };
       }
       return response;
     } catch (err) {
@@ -51,7 +51,6 @@ class Coffeeshop {
       const coffeeshop = await this.coffeeshop().deleteOne({
         place_id,
       });
-      console.log(coffeeshop)
       if (coffeeshop.deletedCount === 0) {
         throw { name: "not found", statusCode: 404 };
       }
