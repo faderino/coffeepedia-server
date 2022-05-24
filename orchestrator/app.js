@@ -60,11 +60,11 @@ const resolvers = {
       try {
         const articlesCache = await redis.get("articles");
         let articles = JSON.parse(articlesCache);
+        const { data } = await axios({
+          url: `${urlArticle}/articles`,
+          method: "GET",
+        });
         if (!articlesCache) {
-          const { data } = await axios({
-            url: `${urlArticle}/articles`,
-            method: "GET",
-          });
           articles = data;
           redis.set("articles", JSON.stringify(data));
           return articles;
@@ -508,6 +508,7 @@ const resolvers = {
         console.log(data);
         return data;
       } catch (error) {
+        console.log(error);
         return error;
       }
     },

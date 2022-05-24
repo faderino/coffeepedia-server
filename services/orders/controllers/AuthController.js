@@ -42,6 +42,7 @@ class AuthController {
       res.status(200).json({
         id: emailTrue.id,
         username: emailTrue.username,
+        email: emailTrue.email,
         balance: emailTrue.balance,
         accesstoken: jwtToken,
       });
