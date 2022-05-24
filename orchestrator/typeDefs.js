@@ -126,6 +126,7 @@ const typeDefs = gql`
   type LoginResponse {
     id: ID
     username: String
+    email: String
     balance: Int
     accesstoken: String
   }
