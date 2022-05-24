@@ -17,7 +17,6 @@ class PaymentController {
         },
       };
 
-      console.log(parameter);
 
       let donation = await snap.createTransaction(parameter);
 

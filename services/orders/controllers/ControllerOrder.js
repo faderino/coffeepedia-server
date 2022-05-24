@@ -20,7 +20,6 @@ class ControllerOrder {
         { transaction: t }
       );
 
-      console.log(response);
       let send = {
         message: "Cart Found",
         response,

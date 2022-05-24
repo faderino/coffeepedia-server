@@ -55,7 +55,6 @@ describe("User Test", () => {
       .post("/login")
       .send({ email: "admisssn@gmail.com", password: "admin" })
       .expect(401);
-    console.log(res.body);
     expect(res.body).toEqual(expect.any(Object));
     expect(res.body.message).toBe("Email or Password invalid");
   });
@@ -65,7 +64,6 @@ describe("User Test", () => {
       .post("/login")
       .send({ email: "admin@gmail.com", password: "asdadmin" })
       .expect(401);
-    console.log(res.body);
     expect(res.body).toEqual(expect.any(Object));
     expect(res.body.message).toBe("Email or Password invalid");
   });

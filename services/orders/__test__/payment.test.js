@@ -74,7 +74,6 @@ describe("Payment Test Test", () => {
         OrderId: getCurrentTimestamp(),
       })
       .expect(200);
-    console.log(res.body);
     expect(res.body).toEqual(expect.any(Object));
     expect(res.body.token).toEqual(expect.any(String));
     expect(res.body.redirect_url).toEqual(expect.any(String));

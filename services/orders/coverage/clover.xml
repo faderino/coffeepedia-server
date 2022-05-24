@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653403642146" clover="3.2.0">
-  <project timestamp="1653403642146" name="All files">
+<coverage generated="1653410819366" clover="3.2.0">
+  <project timestamp="1653410819366" name="All files">
     <metrics statements="294" coveredstatements="287" conditionals="57" coveredconditionals="49" methods="36" coveredmethods="36" elements="387" coveredelements="372" complexity="0" loc="294" ncloc="294" packages="6" files="25" classes="25"/>
     <package name="orders">
       <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
@@ -44,8 +44,8 @@
         <line num="35" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="49" count="2" type="stmt"/>
-        <line num="54" count="7" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="55" count="7" type="stmt"/>
       </file>
       <file name="CategoryController.js" path="D:\Bootcamp\phase_3\challenge\final_project\coffeepedia-server\services\orders\controllers\CategoryController.js">
         <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
