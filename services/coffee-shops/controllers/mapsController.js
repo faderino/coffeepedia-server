@@ -7,7 +7,6 @@ class Controller {
       const nearby = await Maps.nearbySearch({ latitude, longitude });
       res.status(200).json(nearby);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
@@ -15,7 +14,6 @@ class Controller {
   static async placeDetail(req, res, next) {
     try {
       const { place_id } = req.query;
-      console.log(place_id);
       const detail = await Maps.placeDetail(place_id);
       res.status(200).json(detail);
     } catch (err) {
