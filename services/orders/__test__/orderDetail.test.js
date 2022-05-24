@@ -101,7 +101,6 @@ describe("Order Detail Test", () => {
       })
       .expect(400);
 
-    console.log(res.body);
     res.body;
     expect(res.body.message).toBe(
       `Item sudah ada dikerjanjang. perbaharui isi keranjang?`
@@ -129,7 +128,6 @@ describe("Order Detail Test", () => {
       })
       .expect(200);
 
-    console.log(res.body);
     expect(res.body).toEqual(expect.any(Object));
     expect(res.body.message).toEqual(expect.any(String));
   });
