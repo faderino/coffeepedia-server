@@ -1,22 +1,17 @@
 "use strict";
 const router = require("express").Router();
-const AuthController = require("../controllers/AuthController.js");
-const errorHandler = require("../middlewares/errorHandler.js");
-const itemRouter = require("./itemRouter.js");
+const itemRouter = require("./routeItem");
+const userRouter = require("./routeUser");
+const orderRouter = require("./orders");
+const orderDetailRouter = require("./orderDetails");
+const paymentRouter = require("./payment");
+const cateogryRouter = require("./routeCategory");
 
-router.post(
-  "/register",
-  // authentication,
-  // isAdmin,
-  AuthController.register
-);
-
-router.post("/login", AuthController.login);
-
-router.use("/orders");
-router.use("/orderDetails");
+router.use("/", userRouter);
 router.use("/items", itemRouter);
-
-router.use(errorHandler);
+router.use("/orders", orderRouter);
+router.use("/orderDetails", orderDetailRouter);
+router.use("/payments", paymentRouter);
+router.use("/categories", cateogryRouter);
 
 module.exports = router;

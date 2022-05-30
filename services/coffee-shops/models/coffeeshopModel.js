@@ -1,4 +1,5 @@
 const { getDb } = require("../config/mongoConnection");
+const { addValidator } = require("../helpers/validator");
 
 class Coffeeshop {
   static coffeeshop() {
@@ -8,6 +9,10 @@ class Coffeeshop {
 
   static async addCoffeeshop(data) {
     try {
+      const invalid = addValidator(data);
+      if (invalid) {
+        throw invalid;
+      }
       const { place_id, name } = data;
       await this.coffeeshop().insertOne({
         place_id,
@@ -21,7 +26,6 @@ class Coffeeshop {
   static async findAll() {
     try {
       const response = await this.coffeeshop().find().toArray();
-      console.log(response);
       return response;
     } catch (err) {
       throw err;
@@ -33,6 +37,9 @@ class Coffeeshop {
       const response = await this.coffeeshop().findOne({
         place_id,
       });
+      if (!response) {
+        throw { name: "not found", statusCode: 404 };
+      }
       return response;
     } catch (err) {
       throw err;
@@ -44,11 +51,10 @@ class Coffeeshop {
       const coffeeshop = await this.coffeeshop().deleteOne({
         place_id,
       });
-
-      if (coffeeshop.deleteCount === 0) {
+      if (coffeeshop.deletedCount === 0) {
         throw { name: "not found", statusCode: 404 };
       }
-    } catch (error) {
+    } catch (err) {
       throw err;
     }
   }

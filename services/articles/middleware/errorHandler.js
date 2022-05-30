@@ -4,7 +4,8 @@ const errorHandler = async (error, req, res, next) => {
             res.status(404).json({ message: error.name })
             break;
         default:
-            break;
+            res.status(500).json({message: 'Internal Server Error'})
+            break
     }
 }
 

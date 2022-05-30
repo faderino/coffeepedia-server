@@ -1,20 +1,19 @@
-const { comparePassword } = require("../helper/bcrypt");
-const { createToken } = require("../helper/jwt");
-const { User } = require("../models");
-
+const { comparePassword } = require("../helpers/bcrypt");
+const { createToken } = require("../helpers/jwt");
+const { User } = require("../models/index");
 class AuthController {
   static async register(req, res, next) {
     try {
-      const { username, email, password, phoneNumber, address, balance } =
-        req.body;
+      const { username, email, password, phoneNumber, address } = req.body;
       const data = await User.create({
         username,
         email,
         password,
         phoneNumber,
         address,
-        balance,
+        balance: 0,
       });
+
       res.status(201).json(data);
     } catch (error) {
       next(error);
@@ -28,6 +27,7 @@ class AuthController {
       if (!emailTrue) {
         throw "EmailPasswordFalse";
       }
+
       const passwordTrue = comparePassword(password, emailTrue.password);
       if (!passwordTrue) {
         throw "EmailPasswordFalse";
@@ -38,11 +38,13 @@ class AuthController {
       };
 
       const jwtToken = createToken(payload);
+
       res.status(200).json({
         id: emailTrue.id,
         username: emailTrue.username,
-        role: emailTrue.role,
-        accessToken: jwtToken,
+        email: emailTrue.email,
+        balance: emailTrue.balance,
+        accesstoken: jwtToken,
       });
     } catch (error) {
       next(error);
