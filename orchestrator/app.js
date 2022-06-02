@@ -10,9 +10,9 @@ const PORT = process.env.PORT || 4000;
 const redis = require("./config/connection");
 const axios = require("axios");
 
-const urlArticle = "http://localhost:4001";
-const urlCoffeeShop = "http://localhost:4002";
-const urlOrder = "http://localhost:4003";
+const urlArticle = "https://cfpd-service-articles.herokuapp.com";
+const urlCoffeeShop = "https://cfpd-service-coffee-shops.herokuapp.com";
+const urlOrder = "https://cfpd-service-orders.herokuapp.com";
 
 const dateScalar = new GraphQLScalarType({
   name: "Date",
