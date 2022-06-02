@@ -83,7 +83,7 @@ describe("Order Detail Test", () => {
     expect(response.OrderId).toBe(1);
     expect(response.ItemId).toBe(1);
     expect(response.name).toBe("Kopi");
-    expect(response.price).toBe("25000");
+    expect(response.price).toBe(25000);
     expect(response.quantity).toBe(1);
     expect(response.imageUrl).toBe("www.google.com");
   });
@@ -101,7 +101,6 @@ describe("Order Detail Test", () => {
       })
       .expect(400);
 
-    console.log(res.body);
     res.body;
     expect(res.body.message).toBe(
       `Item sudah ada dikerjanjang. perbaharui isi keranjang?`
@@ -129,7 +128,6 @@ describe("Order Detail Test", () => {
       })
       .expect(200);
 
-    console.log(res.body);
     expect(res.body).toEqual(expect.any(Object));
     expect(res.body.message).toEqual(expect.any(String));
   });
