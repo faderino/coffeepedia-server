@@ -1,5 +1,7 @@
 # Coffeepedia
 
+## Live version of the app can be found here https://m-coffeepedia.web.app/
+
 ## Tech stack:
 
 - Node.js
